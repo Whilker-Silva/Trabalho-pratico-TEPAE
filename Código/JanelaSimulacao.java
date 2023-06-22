@@ -60,7 +60,7 @@ public class JanelaSimulacao extends JFrame{
         {
             larguraMapa = largura;
             alturaMapa = altura;
-            setBackground(Color.white);
+            setBackground(Color.pink);
             tamanho = new Dimension(0, 0);
         }
 

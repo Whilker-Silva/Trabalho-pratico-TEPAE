@@ -13,7 +13,7 @@ public class Veiculo {
     public Veiculo(Localizacao localizacao) {
         this.localizacaoAtual = localizacao;
         localizacaoDestino = null;
-        imagem = new ImageIcon(getClass().getResource("Imagens/veiculo.png")).getImage();
+        imagem = new ImageIcon(getClass().getResource("Imagens/Pessoa.png")).getImage();
     }
 
     public Localizacao getLocalizacaoAtual() {

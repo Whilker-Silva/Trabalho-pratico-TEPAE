@@ -7,8 +7,8 @@ public class Mapa {
     private int largura;
     private int altura;
     
-    private static final int LARGURA_PADRAO = 35;
-    private static final int ALTURA_PADRAO = 35;
+    private static final int LARGURA_PADRAO = 50;
+    private static final int ALTURA_PADRAO = 50;
     
     /**
      * Cria mapa para alocar itens da simulacao.
