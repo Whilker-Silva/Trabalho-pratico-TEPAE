@@ -27,7 +27,7 @@ public class JanelaSimulacao extends JFrame{
         for(int i = 0; i < mapa.getAltura(); i++){
             for(int j = 0; j < mapa.getLargura(); j++){
                 if(mapa.getItem(i, j) != null){//Se existir algum objeto na posicao (i,j)
-                    Veiculo veiculo = mapa.getItem(i, j);
+                    Aluno veiculo = mapa.getItem(i, j);
                     Localizacao localizacao = veiculo.getLocalizacaoAtual();
                     visaoMapa.desenharImagem(localizacao.getX(), localizacao.getY(), veiculo.getImagem());
                 }
@@ -60,7 +60,7 @@ public class JanelaSimulacao extends JFrame{
         {
             larguraMapa = largura;
             alturaMapa = altura;
-            setBackground(Color.white);
+            setBackground(Color.pink);
             tamanho = new Dimension(0, 0);
         }
 
