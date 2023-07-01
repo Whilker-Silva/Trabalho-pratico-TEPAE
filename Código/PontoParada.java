@@ -13,21 +13,17 @@ public class PontoParada extends Item{
         filaAlunos = new LinkedList<Aluno>();
     }
 
-    public void adicionarAluno(Aluno a){
-
-    }
-
     public Aluno removeAluno(){
-        return null;
-        //VEr se pode quebrar o encapsulamento
+        Aluno removido = filaAlunos.poll();
+        return removido;
     }
 
-    private void montarFila(Aluno aluno){
+    public void montarFila(Aluno aluno){
         filaAlunos.add(aluno);
     }
 
     public boolean verificaFila(){
-        return true;
+        return filaAlunos.isEmpty();
     }
 }
 

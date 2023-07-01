@@ -15,4 +15,8 @@ public class Aluno extends Item{
         this.tempoChegada = tempoChegada;
         this.tempoEntrada = tempoEntrada;
     }
+
+    public String toString(){
+        return "\nTempo Chegada:" + tempoChegada + " Tempo Entrada:" + tempoEntrada;
+    }
 }

@@ -5,15 +5,15 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
 public class Simulacao {
-    private Item aluno;
-    private Item mamute;
-    private Item pontoParada;
+    private Aluno aluno;
+    private Mamute mamute;
+    private PontoParada pontoParada;
     private JanelaSimulacao janelaSimulacao;
     private Mapa mapa;
     
     public Simulacao() {
         mapa = new Mapa();
-        aluno = new Aluno(new Localizacao(1,10));//Cria um veiculo em uma posicao aleatoria
+        aluno = new Aluno(new Localizacao(1,10),1,2);//Cria um veiculo em uma posicao aleatoria
         aluno.setLocalizacaoDestino(new Localizacao(1,1));//Define a posicao destino aleatoriamente
         mapa.adicionarItem(aluno);//Inicializando o mapa com o veículo
 
@@ -27,6 +27,7 @@ public class Simulacao {
     
     public void executarSimulacao(int numPassos){
         janelaSimulacao.executarAcao();
+        criarFila(numPassos);
         for (int i = 0; i < numPassos; i++) {
             executarUmPasso();
             esperar(500);
@@ -53,10 +54,19 @@ public class Simulacao {
         }
     }
 
-    private void criarFila(){
-        Random entrada = new Random();
+    private void criarFila(int numPassos){
+        Random e = new Random();
+        
+        int tempoChegada = e.nextInt(5)+1;
+        int tempoEntrada = e.nextInt(3)+1;
 
+        while (tempoChegada + tempoEntrada <= (numPassos - mamute.getTEMPO())){
+            Aluno aluno = new Aluno(new Localizacao(0, 0), tempoChegada, tempoEntrada);
 
-        pontoParada.montarFila(new Aluno(new Localizacao(0, 0), 0, 0));
+            pontoParada.montarFila(aluno);
+            tempoEntrada = e.nextInt(3)+1;
+            tempoChegada += e.nextInt(2)+1;
+            System.out.println(aluno);
+        }
     }
 }

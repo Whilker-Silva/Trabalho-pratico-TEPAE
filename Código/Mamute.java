@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 public class Mamute extends Item{
     private int tempoProximaParada;
     private static final int CAPACIDADE = 10;
+    private final int TEMPO = 15;
 
     public Mamute(Localizacao localizacao){
         super(localizacao);
@@ -17,4 +18,9 @@ public class Mamute extends Item{
     public void realizarPercurso(){
 
     }
+
+    public int getTEMPO() {
+        return TEMPO;
+    }
+    
 }
