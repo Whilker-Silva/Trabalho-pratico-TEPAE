@@ -25,5 +25,17 @@ public class PontoParada extends Item{
     public boolean verificaFila(){
         return filaAlunos.isEmpty();
     }
+
+    public boolean verificaProximaPosicao(Aluno aluno){
+        if(aluno.getProximalocalizao() != null){
+            for (Aluno a : filaAlunos) {
+                if(a.getLocalizacaoAtual().equals(aluno.getProximalocalizao())){
+                    return false;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

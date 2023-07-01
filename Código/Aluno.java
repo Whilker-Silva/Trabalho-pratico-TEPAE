@@ -19,4 +19,11 @@ public class Aluno extends Item{
     public String toString(){
         return "\nTempo Chegada:" + tempoChegada + " Tempo Entrada:" + tempoEntrada;
     }
+
+    public Localizacao getProximalocalizao(){
+        Localizacao destino = getLocalizacaoDestino();
+            return (destino != null) ? getLocalizacaoAtual().proximaLocalizacao(super.localizacaoDestino) : null;
+    }
+
+    
 }

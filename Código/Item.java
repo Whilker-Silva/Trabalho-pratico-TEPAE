@@ -2,8 +2,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public abstract class Item {
-    private Localizacao localizacaoAtual;
-    private Localizacao localizacaoDestino;
+    protected Localizacao localizacaoAtual;
+    protected Localizacao localizacaoDestino;
     private Image imagem;
 
     public Item(Localizacao localizacao){

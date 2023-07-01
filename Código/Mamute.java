@@ -22,5 +22,9 @@ public class Mamute extends Item{
     public int getTEMPO() {
         return TEMPO;
     }
+
+    public void adicionaAluno(){
+        
+    }
     
 }

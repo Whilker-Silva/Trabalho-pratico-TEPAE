@@ -61,11 +61,11 @@ public class Simulacao {
         int tempoEntrada = e.nextInt(3)+1;
 
         while (tempoChegada + tempoEntrada <= (numPassos - mamute.getTEMPO())){
-            Aluno aluno = new Aluno(new Localizacao(0, 0), tempoChegada, tempoEntrada);
+            Aluno aluno = new Aluno(new Localizacao(1, 20), tempoChegada, tempoEntrada);
 
             pontoParada.montarFila(aluno);
             tempoEntrada = e.nextInt(3)+1;
-            tempoChegada += e.nextInt(2)+1;
+            tempoChegada += e.nextInt(3)+1;
             System.out.println(aluno);
         }
     }
