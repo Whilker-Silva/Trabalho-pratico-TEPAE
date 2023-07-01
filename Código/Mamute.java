@@ -1,18 +1,13 @@
-import java.util.ArrayList;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
-public class Mamute {
-    private ArrayList<EntradaMamute> listaPortas;
+public class Mamute extends Item{
     private int tempoProximaParada;
+    private static final int CAPACIDADE = 10;
 
-    public Mamute(){
-        listaPortas = new ArrayList<>();
-        criarEntradas();
-    }
-
-    private void criarEntradas(){
-        listaPortas.add(new EntradaMamute());
-        listaPortas.add(new EntradaMamute());
-        listaPortas.add(new EntradaMamuteEspecial());
+    public Mamute(Localizacao localizacao){
+        super(localizacao);
+        setImagem(new ImageIcon(getClass().getResource("Imagens/Mamute.png")).getImage());
     }
 
     public boolean estaDisponivel(){

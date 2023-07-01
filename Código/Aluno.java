@@ -5,63 +5,12 @@ import javax.swing.ImageIcon;
  * Representa os veiculos da simulacao.
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
-public class Aluno{
-    private Localizacao localizacaoAtual;
-    private Localizacao localizacaoDestino;
-    private Image imagem;
+public class Aluno extends Item{
     private int tempoChegada;
     private int tempoEntrada;
-    private boolean deficiente;
 
     public Aluno(Localizacao localizacao){
-        this.localizacaoAtual = localizacao;
-        localizacaoDestino = null;
-        imagem = new ImageIcon(getClass().getResource("Imagens/Pessoa.png")).getImage();
+        super(localizacao);
+        setImagem(new ImageIcon(getClass().getResource("Imagens/Pessoa.png")).getImage());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public Localizacao getLocalizacaoAtual() {
-        return localizacaoAtual;
-    }
-
-    public Localizacao getLocalizacaoDestino() {
-        return localizacaoDestino;
-    }
-    
-    public Image getImagem(){
-        return imagem;
-    }
-
-    public void setLocalizacaoAtual(Localizacao localizacaoAtual) {
-        this.localizacaoAtual = localizacaoAtual;
-    }
-
-    public void setLocalizacaoDestino(Localizacao localizacaoDestino) {
-        this.localizacaoDestino = localizacaoDestino;
-    }
-    
-    public void executarAcao(){
-        Localizacao destino = getLocalizacaoDestino();
-        if(destino != null){
-            Localizacao proximaLocalizacao = getLocalizacaoAtual().proximaLocalizacao(localizacaoDestino);
-            setLocalizacaoAtual(proximaLocalizacao);
-        }
-    } 
 }

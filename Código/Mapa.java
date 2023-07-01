@@ -3,12 +3,12 @@
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
 public class Mapa {
-    private Aluno[][] itens;
+    private Item[][] itens;
     private int largura;
     private int altura;
     
-    private static final int LARGURA_PADRAO = 35;
-    private static final int ALTURA_PADRAO = 35;
+    private static final int LARGURA_PADRAO = 15;
+    private static final int ALTURA_PADRAO = 15;
     
     /**
      * Cria mapa para alocar itens da simulacao.
@@ -18,7 +18,7 @@ public class Mapa {
     public Mapa(int largura, int altura) {
         this.largura = largura;
         this.altura = altura;
-        itens = new Aluno[altura][largura];
+        itens = new Item[altura][largura];
     }
     /**
      * Cria mapa com tamanho padrao.
@@ -27,20 +27,20 @@ public class Mapa {
         this(LARGURA_PADRAO,ALTURA_PADRAO);
     }
     
-    public void adicionarItem(Aluno v){
+    public void adicionarItem(Item v){
         itens[v.getLocalizacaoAtual().getX()][v.getLocalizacaoAtual().getY()] = v;
     }
     
-    public void removerItem(Aluno v){
+    public void removerItem(Item v){
         itens[v.getLocalizacaoAtual().getX()][v.getLocalizacaoAtual().getY()] = null;
     }
     
-    public void atualizarMapa(Aluno v){
+    public void atualizarMapa(Item v){
         removerItem(v);
         adicionarItem(v);
     }
     
-    public Aluno getItem(int x, int y){
+    public Item getItem(int x, int y){
         return itens[x][y];
     }
 
