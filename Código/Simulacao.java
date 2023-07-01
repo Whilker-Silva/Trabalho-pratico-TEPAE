@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Responsavel pela simulacao.
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
@@ -49,5 +51,12 @@ public class Simulacao {
         }catch(InterruptedException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    private void criarFila(){
+        Random entrada = new Random();
+
+
+        pontoParada.montarFila(new Aluno(new Localizacao(0, 0), 0, 0));
     }
 }
