@@ -65,7 +65,7 @@ public class Simulacao {
 
             pontoParada.montarFila(aluno);
             tempoEntrada = e.nextInt(3)+1;
-            tempoChegada += e.nextInt(3)+1;
+            tempoChegada += e.nextInt(5)+1;
             System.out.println(aluno);
         }
     }
