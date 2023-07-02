@@ -9,7 +9,6 @@ public class PontoParada extends Item{
     public PontoParada(Localizacao localizacao){
         super(localizacao);
         setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus.png")).getImage());
-
         filaAlunos = new LinkedList<Aluno>();
     }
 
@@ -36,6 +35,15 @@ public class PontoParada extends Item{
             }
         }
         return false;
+    }
+
+    @Override
+    public void executarAcao(int tempoSimulacao){
+        for (Aluno aluno : filaAlunos) {
+            if(aluno.getTempoChegada() <= tempoSimulacao){
+                
+            }
+        }
     }
 }
 

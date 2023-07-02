@@ -22,8 +22,15 @@ public class Aluno extends Item{
 
     public Localizacao getProximalocalizao(){
         Localizacao destino = getLocalizacaoDestino();
-            return (destino != null) ? getLocalizacaoAtual().proximaLocalizacao(super.localizacaoDestino) : null;
+            return (destino != null) ? getLocalizacaoAtual().proximaLocalizacao(getLocalizacaoDestino()) : null;
     }
 
+    public int getTempoChegada() {
+        return tempoChegada;
+    }
+
+    public int getTempoEntrada() {
+        return tempoEntrada;
+    }
     
 }

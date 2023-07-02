@@ -7,7 +7,8 @@ import java.util.Random;
 public class Simulacao {
     private Aluno aluno;
     private Mamute mamute;
-    private PontoParada pontoParada;
+    private PontoParada pontoEmbarque;    
+    private PontoParada pontoDesembarque;  
     private JanelaSimulacao janelaSimulacao;
     private Mapa mapa;
     
@@ -20,27 +21,33 @@ public class Simulacao {
         mamute = new Mamute(new Localizacao(1, 0));
         mapa.adicionarItem(mamute);
 
-        pontoParada = new PontoParada(new Localizacao(0, 1));
-        mapa.adicionarItem(pontoParada);
+        pontoEmbarque = new PontoParada(new Localizacao(0, 1));
+        mapa.adicionarItem(pontoEmbarque);
+
+        pontoDesembarque = new PontoParada(new Localizacao(12, 1));
+        mapa.adicionarItem(pontoDesembarque);
+
         janelaSimulacao = new JanelaSimulacao(mapa);
     }
     
-    public void executarSimulacao(int numPassos){
+    public void executarSimulacao(int tempoSimulacao){
         janelaSimulacao.executarAcao();
-        criarFila(numPassos);
-        for (int i = 0; i < numPassos; i++) {
-            executarUmPasso();
+        criarFila(tempoSimulacao);
+        for (int i = 0; i < tempoSimulacao; i++) {
+            executarUmPasso(i);
             esperar(500);
         }        
     }
 
-    private void executarUmPasso() {
-        mapa.removerItem(aluno);
-        aluno.executarAcao();
-        mapa.adicionarItem(aluno);
+    private void executarUmPasso(int tempoSimulacao) {
+        
+        aluno.executarAcao(tempoSimulacao);
+
+        
+
 
         mapa.removerItem(mamute);
-        mamute.executarAcao();
+        mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
         mapa.adicionarItem(mamute);
 
         janelaSimulacao.executarAcao();
@@ -54,18 +61,19 @@ public class Simulacao {
         }
     }
 
-    private void criarFila(int numPassos){
+    private void criarFila(int tempoSimulacao){
         Random e = new Random();
         
         int tempoChegada = e.nextInt(5)+1;
         int tempoEntrada = e.nextInt(3)+1;
 
-        while (tempoChegada + tempoEntrada <= (numPassos - mamute.getTEMPO())){
-            Aluno aluno = new Aluno(new Localizacao(1, 20), tempoChegada, tempoEntrada);
+        while (tempoChegada + tempoEntrada <= (tempoSimulacao - mamute.getTEMPO())){
+            Aluno aluno = new Aluno(new Localizacao(1, 14), tempoChegada, tempoEntrada);
 
-            pontoParada.montarFila(aluno);
-            tempoEntrada = e.nextInt(3)+1;
+            pontoEmbarque.montarFila(aluno);
             tempoChegada += e.nextInt(5)+1;
+            tempoEntrada = e.nextInt(3)+1;
+            
             System.out.println(aluno);
         }
     }

@@ -1,30 +1,56 @@
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.util.Deque;
+import java.util.LinkedList;
+
+
 
 public class Mamute extends Item{
     private int tempoProximaParada;
-    private static final int CAPACIDADE = 10;
+    private final int CAPACIDADE = 10;
     private final int TEMPO = 15;
+    private Deque<Aluno> pilhaAlunos;
 
     public Mamute(Localizacao localizacao){
         super(localizacao);
+        pilhaAlunos = new LinkedList<>();
         setImagem(new ImageIcon(getClass().getResource("Imagens/Mamute.png")).getImage());
     }
 
-    public boolean estaDisponivel(){
+    public boolean estaDisponivel(int tempoSimulacao){
+        if((estaCheio()) && (tempoProximaParada <= tempoSimulacao)){
+            return true;
+        }
         return false;
     }
 
-    public void realizarPercurso(){
+    public void realizarPercurso(int tempoSimulacao, Localizacao localizacaoPonto1, Localizacao localizacaoPonto2){
+        tempoProximaParada = tempoSimulacao + TEMPO;
+        pilhaAlunos.clear();
 
+        executarAcao(tempoSimulacao);
+            
+        if(getLocalizacaoAtual().equals(localizacaoPonto1)) 
+            alteraDestino(localizacaoPonto2);
+        else if(getLocalizacaoAtual().equals(localizacaoPonto2)) 
+            alteraDestino(localizacaoPonto1);
+    }
+
+    public void adicionaAluno(Aluno aluno){
+        pilhaAlunos.add(aluno);
     }
 
     public int getTEMPO() {
         return TEMPO;
     }
-
-    public void adicionaAluno(){
-        
-    }
     
+    public boolean estaCheio(){
+        return pilhaAlunos.size() <= CAPACIDADE;
+    }
+
+    private void alteraDestino(Localizacao localizacao){
+        Localizacao destino = new Localizacao(localizacao.getX()+1, localizacao.getY()-1);
+        setLocalizacaoDestino(destino);
+    }
+
 }
