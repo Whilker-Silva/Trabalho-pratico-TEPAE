@@ -22,7 +22,7 @@ public class PontoParada extends Item{
         //VEr se pode quebrar o encapsulamento
     }
 
-    private void montarFila(Aluno aluno){
+    public void montarFila(Aluno aluno){
         filaAlunos.add(aluno);
     }
 

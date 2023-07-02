@@ -7,14 +7,14 @@ public class Mamute extends Item{
 
     public Mamute(Localizacao localizacao){
         super(localizacao);
-        setImagem(new ImageIcon(getClass().getResource("Imagens/Mamute.png")).getImage());
+        setImagem(new ImageIcon(getClass().getResource("Imagens/Mamute2.0-removebg-preview.png")).getImage());
     }
 
     public boolean estaDisponivel(){
         return false;
     }
 
-    public void realizarPercurso(){
-
+    public void realizarPercurso(Localizacao destino){
+        setLocalizacaoDestino(destino);
     }
 }
