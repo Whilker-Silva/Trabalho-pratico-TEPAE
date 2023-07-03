@@ -7,13 +7,14 @@ public class Mamute extends Item{
     private int tempoProximaParada;
     private int tempoProximaEntrada;
     private final int CAPACIDADE = 1;
-    private final int TEMPO = 15;
+    private int tempo;
     private Deque<Aluno> pilhaAlunos;
 
-    public Mamute(Localizacao localizacao){
+    public Mamute(Localizacao localizacao, Localizacao pontoEmbarque, Localizacao pontoDesembarque){
         super(localizacao);
         pilhaAlunos = new LinkedList<>();
         setImagem(new ImageIcon(getClass().getResource("Imagens/Mamute.png")).getImage());
+        tempo = setTempoPercurso(pontoEmbarque, pontoDesembarque);
     }
 
     public boolean estaDisponivel(int tempoSimulacao){
@@ -24,7 +25,7 @@ public class Mamute extends Item{
     }
 
     public void realizarPercurso(int tempoSimulacao, Localizacao localizacaoPonto1, Localizacao localizacaoPonto2){
-        tempoProximaParada = tempoSimulacao + TEMPO;
+        tempoProximaParada = tempoSimulacao + tempo;
         pilhaAlunos.clear();
         
         if(getLocalizacaoAtual().equals(defineDestino(localizacaoPonto1))) 
@@ -45,14 +46,18 @@ public class Mamute extends Item{
         tempoProximaEntrada = tempoSimulacao + aluno.getTempoEntrada();
     }
 
-    public int getTEMPO() {
-        return TEMPO;
+    public int getTempo() {
+        return tempo;
     }
     
     public boolean estaCheio(){
         return pilhaAlunos.size() >= CAPACIDADE;
     }
 
+    public int setTempoPercurso(Localizacao localizacao1, Localizacao localizacao2){
+        int tempo = Math.abs(localizacao2.getX()-localizacao1.getX())+Math.abs(localizacao2.getY()-localizacao1.getY());
+        return (tempo < 0) ? tempo*(-1) : tempo;
+    }
     
 
     public void setTempoProximaEntrada(int tempoEntrada, int tempoSimulacao){

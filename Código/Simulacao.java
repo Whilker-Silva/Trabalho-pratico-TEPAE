@@ -15,14 +15,17 @@ public class Simulacao {
     public Simulacao() {
         mapa = new Mapa();
 
-        mamute = new Mamute(new Localizacao(1, 0));
-        mapa.adicionarItem(mamute);
-
         pontoEmbarque = new PontoParada(new Localizacao(0, 1));
         mapa.adicionarItem(pontoEmbarque);
+        Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
 
         pontoDesembarque = new PontoParada(new Localizacao(12, 1));
         mapa.adicionarItem(pontoDesembarque);
+        Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
+
+        Localizacao posInicial = new Localizacao(ponto1.getX()+1, ponto1.getY()-1);
+        mamute = new Mamute(posInicial,ponto1,ponto2);
+        mapa.adicionarItem(mamute);
 
         janelaSimulacao = new JanelaSimulacao(mapa);
     }
@@ -38,12 +41,10 @@ public class Simulacao {
     private void executarUmPasso(int tempoSimulacao) {
 
         criarAlunos(tempoSimulacao, pontoEmbarque);
-        criarAlunos(tempoSimulacao, pontoDesembarque);
         movimentarFila(tempoSimulacao, pontoEmbarque);
 
         //if(mamute.estaCheio()){
             mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
-            System.out.println(mamute.getLocalizacaoAtual());
         //}
 
         janelaSimulacao.executarAcao();
