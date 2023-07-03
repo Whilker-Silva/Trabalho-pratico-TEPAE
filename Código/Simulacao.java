@@ -48,8 +48,8 @@ public class Simulacao {
 
         movimentarFila(tempoSimulacao, pontoEmbarque);
 
-        if(mamute.estaCheio())
-            mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
+        //if(mamute.estaCheio())
+            //mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
 
         janelaSimulacao.executarAcao();
     }
@@ -66,7 +66,7 @@ public class Simulacao {
         Random e = new Random();
         
         int tempoChegada = e.nextInt(5);
-        int tempoEntrada = e.nextInt(3)+1;
+        int tempoEntrada = e.nextInt(3)+2;
 
         while (tempoChegada + tempoEntrada <= (tempoSimulacao - mamute.getTEMPO())){
             Aluno aluno = new Aluno(new Localizacao(0, 0), tempoChegada, tempoEntrada);
@@ -74,9 +74,9 @@ public class Simulacao {
 
             filaSimulacao.add(aluno);
             tempoChegada += e.nextInt(5);
-            tempoEntrada = e.nextInt(3)+1;
+            tempoEntrada = e.nextInt(3)+2;
             
-            System.out.println(aluno);
+            //System.out.println(aluno);
         }
     }
 
@@ -87,16 +87,18 @@ public class Simulacao {
             mapa.adicionarItem(aluno);
             pontoParada.montarFila(aluno);
             filaSimulacao.poll();
-            
         }
     }
 
     private void movimentarFila(int tempoSimulacao, PontoParada pontoParada){
-        if(mamute.estaDisponivel(tempoSimulacao) && !pontoParada.estaVazia()){
-            Aluno aluno = pontoParada.removerAluno();
-            mapa.removerItem(aluno);
-            mamute.adicionarAluno(aluno);
-        System.out.println("removeu");
+        if(mamute.estaDisponivel(tempoSimulacao) && !pontoParada.estaVazia() && pontoParada.posicaoEntrada()){
+            Aluno aluno = pontoParada.getPrimeiroFila();
+            if(aluno.getTempoChegada()+aluno.getTempoEntrada() >= tempoSimulacao){
+                pontoParada.removerAluno();
+                mapa.removerItem(aluno);
+                mamute.adicionarAluno(aluno, tempoSimulacao);
+                System.out.println("removeu");
+            }
         }
     }
 

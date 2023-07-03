@@ -7,7 +7,8 @@ import java.util.LinkedList;
 
 public class Mamute extends Item{
     private int tempoProximaParada;
-    private final int CAPACIDADE = 10;
+    private int tempoProximaEntrada;
+    private final int CAPACIDADE = 5;
     private final int TEMPO = 15;
     private Deque<Aluno> pilhaAlunos;
 
@@ -18,7 +19,7 @@ public class Mamute extends Item{
     }
 
     public boolean estaDisponivel(int tempoSimulacao){
-        if((estaCheio()) && (tempoProximaParada <= tempoSimulacao)){
+        if((!estaCheio()) && (tempoProximaParada <= tempoSimulacao) && (tempoProximaEntrada <= tempoSimulacao)){
             return true;
         }
         return false;
@@ -36,8 +37,9 @@ public class Mamute extends Item{
             alteraDestino(localizacaoPonto1);
     }
 
-    public void adicionarAluno(Aluno aluno){
+    public void adicionarAluno(Aluno aluno, int tempoSimulacao){
         pilhaAlunos.add(aluno);
+        tempoProximaEntrada = tempoSimulacao + aluno.getTempoEntrada();
     }
 
     public int getTEMPO() {
@@ -45,7 +47,7 @@ public class Mamute extends Item{
     }
     
     public boolean estaCheio(){
-        return pilhaAlunos.size() <= CAPACIDADE;
+        return pilhaAlunos.size() >= CAPACIDADE;
     }
 
     private void alteraDestino(Localizacao localizacao){

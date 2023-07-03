@@ -44,5 +44,12 @@ public class PontoParada extends Item{
     public Aluno getPrimeiroFila(){
         return filaAlunos.peek();
     }
+
+    public boolean posicaoEntrada(){
+        Localizacao entrada = new Localizacao(getLocalizacaoAtual().getX()+1, getLocalizacaoAtual().getY());
+        if(filaAlunos.peek().getLocalizacaoAtual().equals(entrada))
+            return true;
+        return false;
+    }
 }
 
