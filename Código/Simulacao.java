@@ -31,18 +31,20 @@ public class Simulacao {
         janelaSimulacao.executarAcao();
         for (int i = 0; i < tempoSimulacao; i++) {
             executarUmPasso(i);
-            esperar(500);
+            esperar(200);
         }        
     }
 
     private void executarUmPasso(int tempoSimulacao) {
 
         criarAlunos(tempoSimulacao, pontoEmbarque);
-
+        criarAlunos(tempoSimulacao, pontoDesembarque);
         movimentarFila(tempoSimulacao, pontoEmbarque);
 
-        //if(mamute.estaCheio())
-            //mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
+        //if(mamute.estaCheio()){
+            mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
+            System.out.println(mamute.getLocalizacaoAtual());
+        //}
 
         janelaSimulacao.executarAcao();
     }
@@ -76,5 +78,6 @@ public class Simulacao {
             System.out.println("removeu");
             
         }
+
     }
 }
