@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -5,18 +7,17 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
 public class Simulacao {
-    private Aluno aluno;
+    //private Aluno aluno;
     private Mamute mamute;
     private PontoParada pontoEmbarque;    
     private PontoParada pontoDesembarque;  
     private JanelaSimulacao janelaSimulacao;
     private Mapa mapa;
+    private Queue<Aluno> filaSimulacao;
     
     public Simulacao() {
         mapa = new Mapa();
-        aluno = new Aluno(new Localizacao(1,10),1,2);//Cria um veiculo em uma posicao aleatoria
-        aluno.setLocalizacaoDestino(new Localizacao(1,1));//Define a posicao destino aleatoriamente
-        mapa.adicionarItem(aluno);//Inicializando o mapa com o veículo
+        filaSimulacao = new LinkedList<>();
 
         mamute = new Mamute(new Localizacao(1, 0));
         mapa.adicionarItem(mamute);
@@ -32,7 +33,7 @@ public class Simulacao {
     
     public void executarSimulacao(int tempoSimulacao){
         janelaSimulacao.executarAcao();
-        criarFila(tempoSimulacao);
+        criarFilaSimulacao(tempoSimulacao, pontoEmbarque);
         for (int i = 0; i < tempoSimulacao; i++) {
             executarUmPasso(i);
             esperar(500);
@@ -41,14 +42,14 @@ public class Simulacao {
 
     private void executarUmPasso(int tempoSimulacao) {
         
-        aluno.executarAcao(tempoSimulacao);
+        //aluno.executarAcao(tempoSimulacao);
 
-        
+        montarFila(tempoSimulacao, pontoEmbarque);
 
+        movimentarFila(tempoSimulacao, pontoEmbarque);
 
-        mapa.removerItem(mamute);
-        mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
-        mapa.adicionarItem(mamute);
+        if(mamute.estaCheio())
+            mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
 
         janelaSimulacao.executarAcao();
     }
@@ -61,20 +62,43 @@ public class Simulacao {
         }
     }
 
-    private void criarFila(int tempoSimulacao){
+    private void criarFilaSimulacao(int tempoSimulacao, PontoParada pontoParada){
         Random e = new Random();
         
-        int tempoChegada = e.nextInt(5)+1;
+        int tempoChegada = e.nextInt(5);
         int tempoEntrada = e.nextInt(3)+1;
 
         while (tempoChegada + tempoEntrada <= (tempoSimulacao - mamute.getTEMPO())){
-            Aluno aluno = new Aluno(new Localizacao(1, 14), tempoChegada, tempoEntrada);
+            Aluno aluno = new Aluno(new Localizacao(0, 0), tempoChegada, tempoEntrada);
+            aluno.setLocalizacaoDestino(new Localizacao(pontoParada.getLocalizacaoAtual().getX()+1, pontoParada.getLocalizacaoAtual().getY()));
 
-            pontoEmbarque.montarFila(aluno);
-            tempoChegada += e.nextInt(5)+1;
+            filaSimulacao.add(aluno);
+            tempoChegada += e.nextInt(5);
             tempoEntrada = e.nextInt(3)+1;
             
             System.out.println(aluno);
         }
     }
+
+    private void montarFila(int tempoSimulacao, PontoParada pontoParada){
+        while(!filaSimulacao.isEmpty() && filaSimulacao.peek().getTempoChegada() <= tempoSimulacao) {
+            Aluno aluno = filaSimulacao.peek();
+            aluno.setLocalizacaoAtual(pontoParada.posicaoLivre());
+            mapa.adicionarItem(aluno);
+            pontoParada.montarFila(aluno);
+            filaSimulacao.poll();
+            
+        }
+    }
+
+    private void movimentarFila(int tempoSimulacao, PontoParada pontoParada){
+        if(mamute.estaDisponivel(tempoSimulacao) && !pontoParada.estaVazia()){
+            Aluno aluno = pontoParada.removerAluno();
+            mapa.removerItem(aluno);
+            mamute.adicionarAluno(aluno);
+        System.out.println("removeu");
+        }
+    }
+
+    
 }

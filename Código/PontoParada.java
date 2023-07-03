@@ -12,7 +12,7 @@ public class PontoParada extends Item{
         filaAlunos = new LinkedList<Aluno>();
     }
 
-    public Aluno removeAluno(){
+    public Aluno removerAluno(){
         Aluno removido = filaAlunos.poll();
         return removido;
     }
@@ -21,7 +21,7 @@ public class PontoParada extends Item{
         filaAlunos.add(aluno);
     }
 
-    public boolean verificaFila(){
+    public boolean estaVazia(){
         return filaAlunos.isEmpty();
     }
 
@@ -37,13 +37,12 @@ public class PontoParada extends Item{
         return false;
     }
 
-    @Override
-    public void executarAcao(int tempoSimulacao){
-        for (Aluno aluno : filaAlunos) {
-            if(aluno.getTempoChegada() <= tempoSimulacao){
-                
-            }
-        }
+    public Localizacao posicaoLivre(){
+        return new Localizacao(getLocalizacaoAtual().getX()+1, getLocalizacaoAtual().getY()+filaAlunos.size());
+    }
+
+    public Aluno getPrimeiroFila(){
+        return filaAlunos.peek();
     }
 }
 

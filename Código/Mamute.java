@@ -36,7 +36,7 @@ public class Mamute extends Item{
             alteraDestino(localizacaoPonto1);
     }
 
-    public void adicionaAluno(Aluno aluno){
+    public void adicionarAluno(Aluno aluno){
         pilhaAlunos.add(aluno);
     }
 
