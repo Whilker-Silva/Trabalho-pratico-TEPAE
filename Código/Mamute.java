@@ -3,8 +3,6 @@ import javax.swing.ImageIcon;
 import java.util.Deque;
 import java.util.LinkedList;
 
-
-
 public class Mamute extends Item{
     private int tempoProximaParada;
     private int tempoProximaEntrada;
@@ -53,6 +51,10 @@ public class Mamute extends Item{
     private void alteraDestino(Localizacao localizacao){
         Localizacao destino = new Localizacao(localizacao.getX()+1, localizacao.getY()-1);
         setLocalizacaoDestino(destino);
+    }
+
+    public void setTempoProximaEntrada(int tempoEntrada, int tempoSimulacao){
+        tempoProximaEntrada = tempoSimulacao + tempoEntrada;
     }
 
 }
