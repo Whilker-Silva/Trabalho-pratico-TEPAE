@@ -25,7 +25,9 @@ public class Simulacao {
         Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
 
         Localizacao posInicial = new Localizacao(ponto1.getX() + 1, ponto1.getY() - 1);
-        mamute = new Mamute(posInicial, ponto1, ponto2);
+        Localizacao posFinal = new Localizacao(ponto2.getX() + 1, ponto2.getY() - 1);
+
+        mamute = new Mamute(posInicial, posFinal);
         mapa.adicionarItem(mamute);
 
         janelaSimulacao = new JanelaSimulacao(mapa);
@@ -66,7 +68,8 @@ public class Simulacao {
 
         for (int i = 0; i < qtdAlunos; i++) {
             int tempoEntrada = e.nextInt(3) + 1;
-            Aluno aluno = new Aluno(pontoParada.posicaoLivre(), tempoSimulacao, tempoEntrada);
+            Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX()+1, pontoParada.getLocalizacaoAtual().getY());
+            Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
             mapa.adicionarItem(aluno);
             pontoParada.montarFila(aluno);
         }
