@@ -1,6 +1,5 @@
 import java.util.LinkedList;
 import java.util.Queue;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class PontoParada extends Item{

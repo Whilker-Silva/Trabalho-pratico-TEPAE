@@ -1,4 +1,3 @@
-import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.util.Deque;
 import java.util.LinkedList;
