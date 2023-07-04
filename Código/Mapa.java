@@ -5,10 +5,7 @@
 public class Mapa {
     private Item[][] itens;
     private int largura;
-    private int altura;
-    
-    private static final int LARGURA_PADRAO = 15;
-    private static final int ALTURA_PADRAO = 15;
+    private int altura;    
     
     /**
      * Cria mapa para alocar itens da simulacao.
@@ -20,12 +17,7 @@ public class Mapa {
         this.altura = altura;
         itens = new Item[altura][largura];
     }
-    /**
-     * Cria mapa com tamanho padrao.
-     */
-    public Mapa(){
-        this(LARGURA_PADRAO,ALTURA_PADRAO);
-    }
+   
     
     public void adicionarItem(Item v){
         itens[v.getLocalizacaoAtual().getX()][v.getLocalizacaoAtual().getY()] = v;

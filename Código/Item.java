@@ -1,5 +1,4 @@
 import java.awt.Image;
-import javax.swing.ImageIcon;
 
 public abstract class Item {
     private Localizacao localizacaoAtual;
@@ -35,7 +34,7 @@ public abstract class Item {
         this.localizacaoDestino = localizacaoDestino;
     }
     
-    public void executarAcao(){
+    public void executarAcao(int tempoSimulacao){
         Localizacao destino = getLocalizacaoDestino();
         if(destino != null){
             Localizacao proximaLocalizacao = getLocalizacaoAtual().proximaLocalizacao(localizacaoDestino);

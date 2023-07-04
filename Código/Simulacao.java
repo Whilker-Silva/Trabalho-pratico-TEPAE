@@ -2,61 +2,85 @@ import java.util.Random;
 
 /**
  * Responsavel pela simulacao.
+ * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
 public class Simulacao {
-    private Item aluno;
-    private Item mamute;
-    private Item pontoParada;
+
     private JanelaSimulacao janelaSimulacao;
     private Mapa mapa;
-    
-    public Simulacao() {
-        mapa = new Mapa();
-        aluno = new Aluno(new Localizacao(1,10));//Cria um veiculo em uma posicao aleatoria
-        aluno.setLocalizacaoDestino(new Localizacao(1,1));//Define a posicao destino aleatoriamente
-        mapa.adicionarItem(aluno);//Inicializando o mapa com o veículo
+    private Mamute mamute;
+    private PontoParada pontoEmbarque;
+    private PontoParada pontoDesembarque;
 
-        mamute = new Mamute(new Localizacao(1, 0));
+    public Simulacao() {
+        mapa = new Mapa(40, 40);
+
+        pontoEmbarque = new PontoParada(new Localizacao(0, 1));
+        mapa.adicionarItem(pontoEmbarque);
+        Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
+
+        pontoDesembarque = new PontoParada(new Localizacao(12, 1));
+        mapa.adicionarItem(pontoDesembarque);
+        Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
+
+        Localizacao posInicial = new Localizacao(ponto1.getX() + 1, ponto1.getY() - 1);
+        mamute = new Mamute(posInicial, ponto1, ponto2);
         mapa.adicionarItem(mamute);
 
-        pontoParada = new PontoParada(new Localizacao(0, 1));
-        mapa.adicionarItem(pontoParada);
         janelaSimulacao = new JanelaSimulacao(mapa);
     }
-    
-    public void executarSimulacao(int numPassos){
+
+    public void executarSimulacao(int tempoSimulacao) {
         janelaSimulacao.executarAcao();
-        for (int i = 0; i < numPassos; i++) {
-            executarUmPasso();
-            esperar(500);
-        }        
+        for (int i = 0; i < tempoSimulacao; i++) {
+            executarUmPasso(i);
+            esperar(200);
+        }
     }
 
-    private void executarUmPasso() {
-        mapa.removerItem(aluno);
-        aluno.executarAcao();
-        mapa.adicionarItem(aluno);
+    private void executarUmPasso(int tempoSimulacao) {
 
-        mapa.removerItem(mamute);
-        mamute.executarAcao();
-        mapa.adicionarItem(mamute);
+        criarAlunos(tempoSimulacao, pontoEmbarque);
+        movimentarFila(tempoSimulacao, pontoEmbarque);
+
+        // if(mamute.estaCheio()){
+        mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(),
+                pontoDesembarque.getLocalizacaoAtual());
+        // }
 
         janelaSimulacao.executarAcao();
     }
-    
-    private void esperar(int milisegundos){
-        try{
+
+    private void esperar(int milisegundos) {
+        try {
             Thread.sleep(milisegundos);
-        }catch(InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private void criarFila(){
-        Random entrada = new Random();
+    private void criarAlunos(int tempoSimulacao, PontoParada pontoParada) {
+        Random e = new Random();
+        int qtdAlunos = e.nextInt(4);
 
+        for (int i = 0; i < qtdAlunos; i++) {
+            int tempoEntrada = e.nextInt(3) + 1;
+            Aluno aluno = new Aluno(pontoParada.posicaoLivre(), tempoSimulacao, tempoEntrada);
+            mapa.adicionarItem(aluno);
+            pontoParada.montarFila(aluno);
+        }
+    }
 
-        pontoParada.montarFila(new Aluno(new Localizacao(0, 0), 0, 0));
+    private void movimentarFila(int tempoSimulacao, PontoParada pontoParada) {
+        if (mamute.estaDisponivel(tempoSimulacao) && !pontoParada.estaVazia() && pontoParada.posicaoEntrada()) {
+            Aluno aluno = pontoParada.removerAluno();
+            mapa.removerItem(aluno);
+            mamute.adicionarAluno(aluno, tempoSimulacao);
+            mamute.setTempoProximaEntrada(aluno.getTempoEntrada(), tempoSimulacao);
+            System.out.println("removeu");
+
+        }
+
     }
 }

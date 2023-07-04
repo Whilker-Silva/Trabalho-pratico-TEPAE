@@ -1,4 +1,3 @@
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,4 +14,22 @@ public class Aluno extends Item{
         this.tempoChegada = tempoChegada;
         this.tempoEntrada = tempoEntrada;
     }
+
+    public String toString(){
+        return "\nTempo Chegada:" + tempoChegada + " Tempo Entrada:" + tempoEntrada;
+    }
+
+    public Localizacao getProximalocalizao(){
+        Localizacao destino = getLocalizacaoDestino();
+            return (destino != null) ? getLocalizacaoAtual().proximaLocalizacao(getLocalizacaoDestino()) : null;
+    }
+
+    public int getTempoChegada() {
+        return tempoChegada;
+    }
+
+    public int getTempoEntrada() {
+        return tempoEntrada;
+    }
+    
 }
