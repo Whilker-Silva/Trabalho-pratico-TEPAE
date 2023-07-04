@@ -23,4 +23,9 @@ public class Aluno extends ItemDinamico {
         return tempoEntrada;
     }
 
+    public boolean chegouDestino(){
+        return true;
+    }
+
+
 }

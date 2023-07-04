@@ -44,12 +44,15 @@ public class Simulacao {
     private void executarUmPasso(int tempoSimulacao) {
 
         criarAlunos(tempoSimulacao, pontoEmbarque);
-        movimentarFila(tempoSimulacao, pontoEmbarque);
+        while(!pontoEmbarque.estaAtualizada()){
+            movimentarFila(tempoSimulacao, pontoEmbarque);
+            esperar(200);
+        }
 
-        // if(mamute.estaCheio()){
-        mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(),
-                pontoDesembarque.getLocalizacaoAtual());
-        // }
+         if(mamute.estaCheio()){
+            mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(),
+            pontoDesembarque.getLocalizacaoAtual());
+        }
 
         janelaSimulacao.executarAcao();
     }
@@ -66,24 +69,25 @@ public class Simulacao {
         Random e = new Random();
         int qtdAlunos = e.nextInt(4);
 
-        for (int i = 0; i < qtdAlunos; i++) {
-            int tempoEntrada = e.nextInt(3) + 1;
-            Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX()+1, pontoParada.getLocalizacaoAtual().getY());
-            Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
-            mapa.adicionarItem(aluno);
-            pontoParada.montarFila(aluno);
+        if(!pontoParada.estaCheia()){
+            for (int i = 0; i < qtdAlunos; i++) {
+                int tempoEntrada = e.nextInt(3) + 1;
+                Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX()+1, pontoParada.getLocalizacaoAtual().getY());
+                Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
+                mapa.adicionarItem(aluno);
+                pontoParada.adicionarAluno(aluno);
+            }
         }
     }
-
+ 
     private void movimentarFila(int tempoSimulacao, PontoParada pontoParada) {
-        if (mamute.estaDisponivel(tempoSimulacao) && !pontoParada.estaVazia() && pontoParada.posicaoEntrada()) {
+        if (mamute.estaDisponivel(tempoSimulacao) && !pontoParada.estaVazia()) {
             Aluno aluno = pontoParada.removerAluno();
             mapa.removerItem(aluno);
-            mamute.adicionarAluno(aluno, tempoSimulacao);
-            mamute.setTempoProximaEntrada(aluno.getTempoEntrada(), tempoSimulacao);
-            System.out.println("removeu");
-
+            mamute.embarcarAluno(aluno, tempoSimulacao);
+            //System.out.println("removeu");
         }
 
     }
+    
 }
