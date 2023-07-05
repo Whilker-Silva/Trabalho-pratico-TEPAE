@@ -1,8 +1,12 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 
 public class PontoParada extends Item{
     private ArrayList<Aluno> filaAlunos;
+    private final int CAPACIDADE = 35;
 
     public PontoParada(Localizacao localizacao){
         super(localizacao);
@@ -12,8 +16,23 @@ public class PontoParada extends Item{
 
     public Aluno removerAluno(){
         Aluno removido = filaAlunos.remove(0);
-        movimentarFila();
         return removido;
+    }
+
+
+    public boolean alunoEmbarcado(){
+        if(filaAlunos.isEmpty())
+            return false;
+        return getPrimeiroAluno().getEmbarcou();
+    }
+
+    public Aluno getPrimeiroAluno(){
+        return filaAlunos.get(0);
+    }
+
+    public void embarcarAluno(){
+        if(!filaAlunos.isEmpty())
+            getPrimeiroAluno().setEmbarcou();
     }
 
     public void adicionarAluno(Aluno aluno){
@@ -25,7 +44,7 @@ public class PontoParada extends Item{
     }
 
     public boolean estaCheia(){
-        return filaAlunos.size() >= 35;
+        return filaAlunos.size() >= CAPACIDADE;
     }
 
     public boolean verificaProximaPosicao(Aluno aluno){
@@ -43,25 +62,26 @@ public class PontoParada extends Item{
     public Localizacao posicaoLivre(){
         return new Localizacao(getLocalizacaoAtual().getX()+1, getLocalizacaoAtual().getY()+filaAlunos.size());
     }
-/*
-    public boolean posicaoEntrada(){
-        Localizacao entrada = new Localizacao(getLocalizacaoAtual().getX()+1, getLocalizacaoAtual().getY());
-        if(filaAlunos.peek().getLocalizacaoAtual().equals(entrada))
-            return true;
-        return false;
-    }*/
-
-    private void movimentarFila(){
-        for (Aluno a : filaAlunos) {
-            while(verificaProximaPosicao(a)){
-                a.executarAcao();
-                System.out.println(a.getLocalizacaoDestino());
-            }
-        }
-    }
 
     public boolean estaAtualizada(){
-        return filaAlunos.get(filaAlunos.size()-1).chegouDestino();
+        if(!filaAlunos.isEmpty()){
+            Aluno primeiroFila = filaAlunos.get(0);
+            if(primeiroFila.chegouDestino()){
+                Localizacao ultimoAluno = new Localizacao(posicaoLivre().getX(), posicaoLivre().getY()-1); 
+                return filaAlunos.get(filaAlunos.size()-1).getLocalizacaoAtual().equals(ultimoAluno);
+            }
+            return false;
+        }
+        return true;
     }
+
+    public void atualizaFila(int i){
+        filaAlunos.get(i).executarAcao();
+    }
+
+    public int tamanhoFila(){
+        return filaAlunos.size();
+    }
+
 }
 

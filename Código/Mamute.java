@@ -6,7 +6,7 @@ public class Mamute extends ItemDinamico {
 
     private int tempoProximaParada;
     private int tempoProximaEntrada;
-    private final int CAPACIDADE = 10;
+    private final int CAPACIDADE = 5    ;
     private int tempo;
     private Deque<Aluno> pilhaAlunos;
 
@@ -44,7 +44,6 @@ public class Mamute extends ItemDinamico {
 
     public void embarcarAluno(Aluno aluno, int tempoSimulacao){
         pilhaAlunos.add(aluno);
-        tempoProximaEntrada = tempoSimulacao + aluno.getTempoEntrada();
     }
 
     public int getTempo() {
@@ -63,6 +62,10 @@ public class Mamute extends ItemDinamico {
 
     public void setTempoProximaEntrada(int tempoEntrada, int tempoSimulacao) {
         tempoProximaEntrada = tempoSimulacao + tempoEntrada;
+    }
+
+    public boolean chegouDestino(){
+        return getLocalizacaoAtual().equals(getLocalizacaoDestino());
     }
 
 }
