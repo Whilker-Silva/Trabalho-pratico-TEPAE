@@ -1,3 +1,5 @@
+package br.ufla.gac111.grupo3;
+
 import java.util.Random;
 
 /**
@@ -13,7 +15,9 @@ public class Simulacao {
     private PontoParada pontoEmbarque;
     private PontoParada pontoDesembarque;
 
-    public Simulacao() {
+    private static Simulacao instanciaUnica;
+
+    private Simulacao() {
         mapa = new Mapa(40, 40);
 
         pontoEmbarque = new PontoParada(new Localizacao(0, 1));
@@ -33,11 +37,18 @@ public class Simulacao {
         janelaSimulacao = new JanelaSimulacao(mapa);
     }
 
+    public static Simulacao getInstance() {
+        if (instanciaUnica == null) {
+            instanciaUnica = new Simulacao();
+        }
+        return instanciaUnica;
+    }
+
     public void executarSimulacao(int tempoSimulacao) {
         janelaSimulacao.executarAcao();
         for (int i = 0; i < tempoSimulacao; i++) {
-            //System.out.print("Tempo: ");
-            //System.out.println(i);
+            // System.out.print("Tempo: ");
+            // System.out.println(i);
             executarUmPasso(i);
             esperar(500);
         }
@@ -48,7 +59,7 @@ public class Simulacao {
         embarcarAluno(tempoSimulacao, pontoEmbarque);
         criarAlunos(tempoSimulacao, pontoDesembarque);
         embarcarAluno(tempoSimulacao, pontoDesembarque);
-        
+
         janelaSimulacao.executarAcao();
     }
 
@@ -64,32 +75,34 @@ public class Simulacao {
         Random e = new Random();
         int qtdAlunos = e.nextInt(3);
 
-        if(!pontoParada.estaCheia()){
+        if (!pontoParada.estaCheia()) {
             for (int i = 0; i < qtdAlunos; i++) {
                 int tempoEntrada = e.nextInt(3) + 1;
-                Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX()+1, pontoParada.getLocalizacaoAtual().getY());
+                Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1,
+                        pontoParada.getLocalizacaoAtual().getY());
                 Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
                 mapa.adicionarItem(aluno);
                 pontoParada.adicionarAluno(aluno);
             }
         }
-    }   
+    }
 
-    private void embarcarAluno(int tempoSimulacao, PontoParada pontoParada){
-        if(mamute.estaDisponivel(tempoSimulacao,pontoParada) && !pontoParada.estaVazia()){
-            if(!pontoParada.getPrimeiroAluno().getEmbarcou()){
+    private void embarcarAluno(int tempoSimulacao, PontoParada pontoParada) {
+        if (mamute.estaDisponivel(tempoSimulacao, pontoParada) && !pontoParada.estaVazia()) {
+            if (!pontoParada.getPrimeiroAluno().getEmbarcou()) {
                 mamute.setTempoProximaEntrada(pontoParada.getPrimeiroAluno().getTempoEntrada(), tempoSimulacao);
                 pontoParada.embarcarAluno();
                 System.out.println("embarcou");
-            }else{
+            } else {
                 Aluno aluno = pontoParada.removerAluno();
                 mamute.embarcarAluno(aluno, tempoSimulacao);
                 mapa.removerItem(aluno);
                 System.out.println("removeu");
             }
-        }else{
-            if(mamute.estaCheio())  
-                mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
+        } else {
+            if (mamute.estaCheio())
+                mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(),
+                        pontoDesembarque.getLocalizacaoAtual());
         }
     }
 }

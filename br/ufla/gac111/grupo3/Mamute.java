@@ -1,3 +1,5 @@
+package br.ufla.gac111.grupo3;
+
 import javax.swing.ImageIcon;
 import java.util.Deque;
 import java.util.LinkedList;

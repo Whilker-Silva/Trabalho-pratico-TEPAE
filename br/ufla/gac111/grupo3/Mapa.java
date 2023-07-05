@@ -1,3 +1,5 @@
+package br.ufla.gac111.grupo3;
+
 /**
  * Representa um mapa com todos os itens que participam da simulacao
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
