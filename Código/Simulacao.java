@@ -36,8 +36,8 @@ public class Simulacao {
     public void executarSimulacao(int tempoSimulacao) {
         janelaSimulacao.executarAcao();
         for (int i = 0; i < tempoSimulacao; i++) {
-            System.out.print("Tempo: ");
-            System.out.println(i);
+            //System.out.print("Tempo: ");
+            //System.out.println(i);
             executarUmPasso(i);
             esperar(500);
         }
@@ -46,6 +46,8 @@ public class Simulacao {
     private void executarUmPasso(int tempoSimulacao) {
         criarAlunos(tempoSimulacao, pontoEmbarque);
         embarcarAluno(tempoSimulacao, pontoEmbarque);
+        criarAlunos(tempoSimulacao, pontoDesembarque);
+        embarcarAluno(tempoSimulacao, pontoDesembarque);
         
         janelaSimulacao.executarAcao();
     }
@@ -67,7 +69,6 @@ public class Simulacao {
                 int tempoEntrada = e.nextInt(3) + 1;
                 Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX()+1, pontoParada.getLocalizacaoAtual().getY());
                 Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
-                System.out.println(pontoParada.posicaoLivre());
                 mapa.adicionarItem(aluno);
                 pontoParada.adicionarAluno(aluno);
             }
@@ -75,7 +76,7 @@ public class Simulacao {
     }   
 
     private void embarcarAluno(int tempoSimulacao, PontoParada pontoParada){
-        if(mamute.estaDisponivel(tempoSimulacao) && !pontoParada.estaVazia()){
+        if(mamute.estaDisponivel(tempoSimulacao,pontoParada) && !pontoParada.estaVazia()){
             if(!pontoParada.getPrimeiroAluno().getEmbarcou()){
                 mamute.setTempoProximaEntrada(pontoParada.getPrimeiroAluno().getTempoEntrada(), tempoSimulacao);
                 pontoParada.embarcarAluno();
@@ -86,6 +87,9 @@ public class Simulacao {
                 mapa.removerItem(aluno);
                 System.out.println("removeu");
             }
+        }else{
+            if(mamute.estaCheio())  
+                mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(), pontoDesembarque.getLocalizacaoAtual());
         }
     }
 }
