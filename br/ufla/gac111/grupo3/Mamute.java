@@ -1,58 +1,57 @@
+package br.ufla.gac111.grupo3;
+
 import javax.swing.ImageIcon;
 import java.util.Deque;
 import java.util.LinkedList;
 
 public class Mamute extends ItemDinamico {
-
-    private int tempoProximaParada;
     private int tempoProximaEntrada;
-    private final int CAPACIDADE = 1;
-    private int tempo;
+    private final int CAPACIDADE = 5    ;
+    private final int velocidade = 2;
     private Deque<Aluno> pilhaAlunos;
 
     public Mamute(Localizacao localizacaoAtual, Localizacao localizacaoDestino) {
         super(localizacaoAtual, localizacaoDestino);
         pilhaAlunos = new LinkedList<>();
         setImagem(new ImageIcon(getClass().getResource("Imagens/Mamute.png")).getImage());
-        tempo = setTempoPercurso(localizacaoAtual, localizacaoDestino);
     }
 
    
-    public boolean estaDisponivel(int tempoSimulacao) {
-        if ((!estaCheio()) && (tempoProximaParada <= tempoSimulacao) && (tempoProximaEntrada <= tempoSimulacao)) {
+    public boolean estaDisponivel(int tempoSimulacao, PontoParada pontoParada) {
+        if ((!estaCheio()) && (tempoProximaEntrada <= tempoSimulacao) && estaPosicionado(definePosicao(pontoParada.getLocalizacaoAtual()))) {
             return true;
         }
         return false;
     }
 
     public void realizarPercurso(int tempoSimulacao, Localizacao localizacaoPonto1, Localizacao localizacaoPonto2) {
-        tempoProximaParada = tempoSimulacao + tempo;
-        pilhaAlunos.clear();
+        
+        for (int i = 0; i < velocidade; i++) 
+            executarAcao();
+        
+        if(chegouDestino())
+            pilhaAlunos.clear();
 
-        if (getLocalizacaoAtual().equals(defineDestino(localizacaoPonto1)))
-            setLocalizacaoDestino(defineDestino(localizacaoPonto2));
-        else if (getLocalizacaoAtual().equals(defineDestino(localizacaoPonto2)))
-            setLocalizacaoDestino(defineDestino(localizacaoPonto1));
-
-        executarAcao(tempoSimulacao);
+        if (estaPosicionado(definePosicao(localizacaoPonto1)))
+            setLocalizacaoDestino(definePosicao(localizacaoPonto2));
+        else if (estaPosicionado(definePosicao(localizacaoPonto2)))
+            setLocalizacaoDestino(definePosicao(localizacaoPonto1));
     }
 
-    private Localizacao defineDestino(Localizacao localizacao) {
+    private Localizacao definePosicao(Localizacao localizacao) {
         return new Localizacao(localizacao.getX() + 1, localizacao.getY() - 1);
-
     }
 
-    public void adicionarAluno(Aluno aluno, int tempoSimulacao) {
+    public void embarcarAluno(Aluno aluno, int tempoSimulacao){
         pilhaAlunos.add(aluno);
-        tempoProximaEntrada = tempoSimulacao + aluno.getTempoEntrada();
     }
 
-    public int getTempo() {
-        return tempo;
+    public boolean estaPosicionado(Localizacao pontoParada){
+        return getLocalizacaoAtual().equals(pontoParada);
     }
 
     public boolean estaCheio() {
-        return pilhaAlunos.size() >= CAPACIDADE;
+        return pilhaAlunos.size() == CAPACIDADE;
     }
 
     public int setTempoPercurso(Localizacao localizacao1, Localizacao localizacao2) {
@@ -63,6 +62,10 @@ public class Mamute extends ItemDinamico {
 
     public void setTempoProximaEntrada(int tempoEntrada, int tempoSimulacao) {
         tempoProximaEntrada = tempoSimulacao + tempoEntrada;
+    }
+
+    public boolean chegouDestino(){
+        return getLocalizacaoAtual().equals(getLocalizacaoDestino());
     }
 
 }

@@ -1,3 +1,5 @@
+package br.ufla.gac111.grupo3;
+
 import java.util.Random;
 
 /**

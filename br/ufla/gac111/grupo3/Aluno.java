@@ -1,3 +1,5 @@
+package br.ufla.gac111.grupo3;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -7,6 +9,7 @@ import javax.swing.ImageIcon;
  */
 public class Aluno extends ItemDinamico {
     private int tempoEntrada;
+    private boolean embarcou;
 
     public Aluno(Localizacao localizacaoAtual, Localizacao localizacaoDestino, int tempoEntrada) {
         super(localizacaoAtual, localizacaoDestino);
@@ -21,6 +24,18 @@ public class Aluno extends ItemDinamico {
 
     public int getTempoEntrada() {
         return tempoEntrada;
+    }
+
+    public boolean chegouDestino(){
+        return getLocalizacaoAtual().equals(getLocalizacaoDestino());
+    }
+
+    public void setEmbarcou(){
+        embarcou = true;
+    }
+
+    public boolean getEmbarcou(){
+        return embarcou;
     }
 
 }
