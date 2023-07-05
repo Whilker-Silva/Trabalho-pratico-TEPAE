@@ -62,6 +62,7 @@ public class Mamute extends ItemDinamico {
 
     public void setTempoProximaEntrada(int tempoEntrada, int tempoSimulacao) {
         tempoProximaEntrada = tempoSimulacao + tempoEntrada;
+        System.out.println(tempoProximaEntrada);
     }
 
     public boolean chegouDestino(){
