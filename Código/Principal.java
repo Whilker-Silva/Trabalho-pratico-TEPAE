@@ -1,6 +1,7 @@
 /**
  * Classe que contem o método main, responsável apenas por instanciar o objeto
- * Simulacao e chamar o método executar a simulação * 
+ * Simulacao e chamar o método executar a simulação *
+ * 
  * @author Luiz Merschmann
  */
 public class Principal {
