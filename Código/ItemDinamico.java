@@ -15,7 +15,7 @@ public class ItemDinamico extends Item {
         this.localizacaoDestino = localizacaoDestino;
     }
 
-    public void executarAcao(int tempoSimulacao) {
+    public void executarAcao() {
         Localizacao destino = getLocalizacaoDestino();
         if (destino != null) {
             Localizacao proximaLocalizacao = getLocalizacaoAtual().proximaLocalizacao(localizacaoDestino);
