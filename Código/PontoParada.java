@@ -19,7 +19,7 @@ public class PontoParada extends Item {
         for (int i = 1; i < filaAlunos.size() - 1; i++) {
             // Aluno proximoAluno = filaAlunos.get(i+1);
             Aluno aluno1 = filaAlunos.get(0);
-            aluno1.setPosiacoFila(getLocalizacaoAtual().getY() + 1);
+            // aluno1.setPosiacoFila(getLocalizacaoAtual().getY() + 1);
         }
         return removido;
     }
