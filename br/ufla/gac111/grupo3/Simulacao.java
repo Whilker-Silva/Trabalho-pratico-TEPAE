@@ -25,11 +25,11 @@ public class Simulacao {
     private Simulacao() {
         mapa = new Mapa(40, 40);
 
-        pontoEmbarque = new PontoParada(new Localizacao(0, 1));
+        pontoEmbarque = new PontoParada(new Localizacao(0, 1), mapa.getAltura());
         mapa.adicionarItem(pontoEmbarque);
         Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
 
-        pontoDesembarque = new PontoParada(new Localizacao(12, 1));
+        pontoDesembarque = new PontoParada(new Localizacao(12, 1), mapa.getAltura());
         mapa.adicionarItem(pontoDesembarque);
         Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
 
@@ -52,8 +52,6 @@ public class Simulacao {
     public void executarSimulacao(int tempoSimulacao) {
         janelaSimulacao.executarAcao();
         for (int i = 0; i < tempoSimulacao; i++) {
-            // System.out.print("Tempo: ");
-            // System.out.println(i);
             executarUmPasso(i);
             esperar(500);
         }
@@ -62,10 +60,13 @@ public class Simulacao {
     private void executarUmPasso(int tempoSimulacao) {
         criarAlunos(tempoSimulacao, pontoEmbarque);
         embarcarAluno(tempoSimulacao, pontoEmbarque);
-        criarAlunos(tempoSimulacao, pontoDesembarque);
-        embarcarAluno(tempoSimulacao, pontoDesembarque);
-
+        esperar(100);
         janelaSimulacao.executarAcao();
+
+        movimentaFila(pontoEmbarque);
+        //criarAlunos(tempoSimulacao, pontoDesembarque);
+        //embarcarAluno(tempoSimulacao, pontoDesembarque);
+
     }
 
     private void criarAlunos(int tempoSimulacao, PontoParada pontoParada) {
@@ -89,17 +90,34 @@ public class Simulacao {
             if (!pontoParada.getPrimeiroAluno().getEmbarcou()) {
                 mamute.setTempoProximaEntrada(pontoParada.getPrimeiroAluno().getTempoEntrada(), tempoSimulacao);
                 pontoParada.embarcarAluno();
-                System.out.println("embarcou");
             } else {
                 Aluno aluno = pontoParada.removerAluno();
                 mamute.embarcarAluno(aluno, tempoSimulacao);
                 mapa.removerItem(aluno);
-                System.out.println("removeu");
             }
         } else {
-            if (mamute.estaCheio())
+            if (mamute.estaCheio()) {
                 mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(),
                         pontoDesembarque.getLocalizacaoAtual());
+            }
+        }
+    }
+
+    private void movimentaFila(PontoParada pontoParada) {
+
+        if (!pontoParada.estaVazia()) {
+            boolean aux = true;
+            while (aux) {
+                aux = false;
+                for (int i = 0; i < pontoParada.tamanhoFila(); i++) {
+                    esperar(200);
+                    if (pontoParada.atualizaFila(i))
+                        aux = true;
+
+                    janelaSimulacao.executarAcao();
+                    System.out.println(aux);
+                }
+            }
         }
     }
 
