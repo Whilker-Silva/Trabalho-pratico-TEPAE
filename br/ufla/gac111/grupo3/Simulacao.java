@@ -47,8 +47,6 @@ public class Simulacao {
     public void executarSimulacao(int tempoSimulacao) {
         janelaSimulacao.executarAcao();
         for (int i = 0; i < tempoSimulacao; i++) {
-            // System.out.print("Tempo: ");
-            // System.out.println(i);
             executarUmPasso(i);
             esperar(500);
         }
@@ -57,8 +55,10 @@ public class Simulacao {
     private void executarUmPasso(int tempoSimulacao) {
         criarAlunos(tempoSimulacao, pontoEmbarque);
         embarcarAluno(tempoSimulacao, pontoEmbarque);
-        criarAlunos(tempoSimulacao, pontoDesembarque);
-        embarcarAluno(tempoSimulacao, pontoDesembarque);
+
+        movimentaFila(pontoEmbarque);
+        // criarAlunos(tempoSimulacao, pontoDesembarque);
+        // embarcarAluno(tempoSimulacao, pontoDesembarque);
 
         janelaSimulacao.executarAcao();
     }
@@ -81,6 +81,8 @@ public class Simulacao {
                 Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1,
                         pontoParada.getLocalizacaoAtual().getY());
                 Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
+                System.out.print("aluno criado");
+                System.out.println(aluno.getLocalizacaoAtual());
                 mapa.adicionarItem(aluno);
                 pontoParada.adicionarAluno(aluno);
             }
@@ -92,17 +94,36 @@ public class Simulacao {
             if (!pontoParada.getPrimeiroAluno().getEmbarcou()) {
                 mamute.setTempoProximaEntrada(pontoParada.getPrimeiroAluno().getTempoEntrada(), tempoSimulacao);
                 pontoParada.embarcarAluno();
-                System.out.println("embarcou");
             } else {
                 Aluno aluno = pontoParada.removerAluno();
                 mamute.embarcarAluno(aluno, tempoSimulacao);
                 mapa.removerItem(aluno);
-                System.out.println("removeu");
+                janelaSimulacao.executarAcao();
+                System.out.print("aluno removido");
+                System.out.println(aluno.getLocalizacaoAtual());
             }
         } else {
             if (mamute.estaCheio())
                 mamute.realizarPercurso(tempoSimulacao, pontoEmbarque.getLocalizacaoAtual(),
                         pontoDesembarque.getLocalizacaoAtual());
+        }
+    }
+
+    private void movimentaFila(PontoParada pontoParada) {
+
+        if (!pontoParada.estaVazia()) {
+            boolean aux = true;
+            while (aux) {
+                aux = false;
+                for (int i = 0; i < pontoParada.tamanhoFila(); i++) {
+                    esperar(200);
+                    if (pontoParada.atualizaFila(i))
+                        aux = true;
+                    
+                    janelaSimulacao.executarAcao();
+                    // System.out.println(aux);
+                }
+            }
         }
     }
 }
