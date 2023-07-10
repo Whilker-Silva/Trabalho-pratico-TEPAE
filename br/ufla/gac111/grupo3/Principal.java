@@ -1,8 +1,7 @@
 package br.ufla.gac111.grupo3;
 
 /**
- * Classe que contém o método main, responsável apenas por instanciar um único
- * objeto
+ * Classe que contém o método main, responsável apenas por instanciar o objeto
  * Simulacao e chamar o método para executar a simulação.
  * 
  * @author Mateus Henrique Teixeira
