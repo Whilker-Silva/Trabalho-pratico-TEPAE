@@ -17,11 +17,6 @@ public class Aluno extends ItemDinamico {
         this.tempoEntrada = tempoEntrada;
     }
 
-    public Localizacao getProximalocalizao() {
-        Localizacao destino = getLocalizacaoDestino();
-        return (destino != null) ? getLocalizacaoAtual().proximaLocalizacao(getLocalizacaoDestino()) : null;
-    }
-
     public int getTempoEntrada() {
         return tempoEntrada;
     }
