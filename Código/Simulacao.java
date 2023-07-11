@@ -2,8 +2,13 @@ import java.util.Random;
 
 /**
  * Responsavel pela simulacao.
+ * <p>
+ * Importante obeservar que foi usado o padrão de projeto singleton para essa
+ * clase,
+ * dessa forma é possível instancia apenas um único objeto do tipo Simulacao
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author
  */
 public class Simulacao {
 
@@ -52,14 +57,6 @@ public class Simulacao {
         janelaSimulacao.executarAcao();
     }
 
-    private void esperar(int milisegundos) {
-        try {
-            Thread.sleep(milisegundos);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     private void criarAlunos(int tempoSimulacao, PontoParada pontoParada) {
         Random e = new Random();
         int qtdAlunos = e.nextInt(3);
@@ -94,4 +91,13 @@ public class Simulacao {
                         pontoDesembarque.getLocalizacaoAtual());
         }
     }
+
+    private void esperar(int milisegundos) {
+        try {
+            Thread.sleep(milisegundos);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
