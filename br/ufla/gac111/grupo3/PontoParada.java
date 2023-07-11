@@ -70,16 +70,10 @@ public class PontoParada extends Item {
         return new Localizacao(getLocalizacaoAtual().getX() + 1, getLocalizacaoAtual().getY());
     }
 
-    public boolean estaAtualizada() {
-        if (!estaVazia()) {
-            Localizacao ultimoAluno = new Localizacao(posicaoLivre().getX(), posicaoLivre().getY() - 1);
-            return filaAlunos.get(filaAlunos.size() - 1).getLocalizacaoAtual().equals(ultimoAluno);
-        }
-        return true;
-    }
-
     public boolean atualizaFila(int i) {
         Aluno aluno = filaAlunos.get(i);
+        System.out.print((i+1) + ": ");
+        System.out.println(aluno.getLocalizacaoAtual());
         // System.out.print("aluno " + i + ": ");
         // System.out.println(aluno.getLocalizacaoAtual());
         // System.out.println("posicao meta: ");
@@ -88,7 +82,6 @@ public class PontoParada extends Item {
         Localizacao localizacao = new Localizacao(getLocalizacaoAtual().getX() + 1, getLocalizacaoAtual().getY() + i);
         if (!aluno.getLocalizacaoAtual().equals(localizacao)) {
             aluno.executarAcao();
-            System.out.println("diferente");
             return true;
         }
         return false;

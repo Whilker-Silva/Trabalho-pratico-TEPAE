@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class Mamute extends ItemDinamico {
     private int tempoProximaEntrada;
-    private final int CAPACIDADE = 5    ;
+    private final int CAPACIDADE = 10;
     private final int velocidade = 2;
     private Deque<Aluno> pilhaAlunos;
 
