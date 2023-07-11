@@ -14,12 +14,12 @@ import java.util.Random;
  */
 public class Simulacao {
 
+    // Atributos
     private JanelaSimulacao janelaSimulacao;
     private Mapa mapa;
     private Mamute mamute;
     private PontoParada pontoEmbarque;
     private PontoParada pontoDesembarque;
-
     private static Simulacao instanciaUnica;
 
     private Simulacao() {
