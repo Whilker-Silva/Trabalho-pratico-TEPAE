@@ -43,7 +43,7 @@ public class PontoParada extends Item {
     }
 
     public void embarcarAluno() {
-        if (!filaAlunos.isEmpty())
+        if (!estaVazia())
             getPrimeiroAluno().setEmbarcou();
     }
 
@@ -72,8 +72,8 @@ public class PontoParada extends Item {
 
     public boolean atualizaFila(int i) {
         Aluno aluno = filaAlunos.get(i);
-        System.out.print((i+1) + ": ");
-        System.out.println(aluno.getLocalizacaoAtual());
+        //System.out.print((i+1) + ": ");
+        //System.out.println(aluno.getLocalizacaoAtual());
         // System.out.print("aluno " + i + ": ");
         // System.out.println(aluno.getLocalizacaoAtual());
         // System.out.println("posicao meta: ");
@@ -89,6 +89,10 @@ public class PontoParada extends Item {
 
     public int tamanhoFila() {
         return filaAlunos.size();
+    }
+
+    public List<Aluno> getFila(){
+        return Collections.unmodifiableList(filaAlunos);
     }
 
 }
