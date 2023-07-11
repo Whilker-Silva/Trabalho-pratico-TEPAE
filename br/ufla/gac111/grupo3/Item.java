@@ -8,7 +8,6 @@ import java.awt.Image;
  */
 
 public abstract class Item {
-
     // Atributos
     private Localizacao localizacaoAtual;
     private Image imagem;
