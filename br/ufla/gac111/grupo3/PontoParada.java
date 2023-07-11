@@ -16,13 +16,11 @@ public class PontoParada extends Item {
 
     // Atributos
     private ArrayList<Aluno> filaAlunos;
-    private final int capacidade;
+    private final int CAPACIDADE = 15;
 
-    public PontoParada(Localizacao localizacao, int altura) {
-
+    public PontoParada(Localizacao localizacao) {
         super(localizacao);
         filaAlunos = new ArrayList<Aluno>();
-        capacidade = altura - 5;
 
         setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus.png")).getImage());
     }
@@ -58,7 +56,7 @@ public class PontoParada extends Item {
     public boolean estaCheia() {
         if (estaVazia())
             return false;
-        return filaAlunos.get(filaAlunos.size() - 1).getLocalizacaoAtual().getY() >= capacidade;
+        return filaAlunos.get(filaAlunos.size() - 1).getLocalizacaoAtual().getY() >= CAPACIDADE;
     }
 
     public Localizacao posicaoLivre() {

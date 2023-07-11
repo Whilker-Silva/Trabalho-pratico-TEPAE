@@ -25,11 +25,11 @@ public class Simulacao {
     private Simulacao() {
         mapa = new Mapa(40, 40);
 
-        pontoEmbarque = new PontoParada(new Localizacao(0, 1), mapa.getAltura());
+        pontoEmbarque = new PontoParada(new Localizacao(0, 1));
         mapa.adicionarItem(pontoEmbarque);
         Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
 
-        pontoDesembarque = new PontoParada(new Localizacao(12, 1), mapa.getAltura());
+        pontoDesembarque = new PontoParada(new Localizacao(12, 1));
         mapa.adicionarItem(pontoDesembarque);
         Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
 
@@ -77,9 +77,7 @@ public class Simulacao {
                         pontoParada.getLocalizacaoAtual().getY());
                 Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
                 System.out.println(pontoParada.posicaoLivre());
-                for (Aluno a : pontoParada.getFila()){
-                    mapa.atualizarMapa(a);
-                }
+                atualizarPontoParada(pontoParada);
                 mapa.adicionarItem(aluno);
                 esperar(50);
                 pontoParada.adicionarAluno(aluno);
@@ -96,6 +94,7 @@ public class Simulacao {
             } else {
                 Aluno aluno = pontoParada.removerAluno();
                 mamute.embarcarAluno(aluno, tempoSimulacao);
+                atualizarPontoParada(pontoParada);
                 mapa.removerItem(aluno);
                 esperar(100);
                 janelaSimulacao.executarAcao();
@@ -139,5 +138,10 @@ public class Simulacao {
                 janelaSimulacao.executarAcao();
                 esperar(100);
             }
+    }
+
+    private void atualizarPontoParada(PontoParada pontoParada){
+        for (Aluno a : pontoParada.getFila())
+            mapa.atualizarMapa(a);
     }
 }
