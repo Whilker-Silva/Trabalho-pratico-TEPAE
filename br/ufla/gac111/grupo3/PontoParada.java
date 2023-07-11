@@ -1,19 +1,30 @@
 package br.ufla.gac111.grupo3;
 
 import java.util.ArrayList;
-//import java.util.Collections;
-//import java.util.List;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.ImageIcon;
 
+/**
+ * Ponto de parada é um item que não se move e
+ * representa os pontos de embraque e desembarque do mamute
+ * <p>
+ * Ponto de parada se diferencia dos demais itens pois nele há uma lista de
+ * alunos na qual representa a fila
+ */
 public class PontoParada extends Item {
+
+    // Atributos
     private ArrayList<Aluno> filaAlunos;
     private final int capacidade;
 
     public PontoParada(Localizacao localizacao, int altura) {
+
         super(localizacao);
-        setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus.png")).getImage());
         filaAlunos = new ArrayList<Aluno>();
         capacidade = altura - 5;
+
+        setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus.png")).getImage());
     }
 
     public Aluno removerAluno() {

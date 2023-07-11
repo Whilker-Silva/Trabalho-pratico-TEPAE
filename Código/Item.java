@@ -1,7 +1,11 @@
 import java.awt.Image;
 
-public abstract class Item {
+/**
+ * Item é uma classe abstrata que reprensenta todos o itens presentes na
+ * simulação
+ */
 
+public abstract class Item {
     // Atributos
     private Localizacao localizacaoAtual;
     private Image imagem;
@@ -14,10 +18,6 @@ public abstract class Item {
         this.imagem = imagem;
     }
 
-    public Localizacao getLocalizacaoAtual() {
-        return localizacaoAtual;
-    }
-
     public Image getImagem() {
         return imagem;
     }
@@ -26,4 +26,7 @@ public abstract class Item {
         this.localizacaoAtual = localizacaoAtual;
     }
 
+    public Localizacao getLocalizacaoAtual() {
+        return localizacaoAtual;
+    }
 }
