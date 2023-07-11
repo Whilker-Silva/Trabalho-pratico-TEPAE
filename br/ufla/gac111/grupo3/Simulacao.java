@@ -6,8 +6,8 @@ import java.util.Random;
  * Responsavel pela simulacao.
  * <p>
  * Importante obeservar que foi usado o padrão de projeto singleton para essa
- * clase,
- * dessa forma é possível instancia apenas um único objeto do tipo Simulacao
+ * clase, dessa forma é possível instanciar apenas um único objeto do tipo
+ * Simulacao
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  * @author
@@ -25,11 +25,11 @@ public class Simulacao {
     private Simulacao() {
         mapa = new Mapa(40, 40);
 
-        pontoEmbarque = new PontoParada(new Localizacao(0, 1));
+        pontoEmbarque = new PontoParada(new Localizacao(35, 1));
         mapa.adicionarItem(pontoEmbarque);
         Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
 
-        pontoDesembarque = new PontoParada(new Localizacao(12, 1));
+        pontoDesembarque = new PontoParada(new Localizacao(5, 1));
         mapa.adicionarItem(pontoDesembarque);
         Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
 
@@ -62,7 +62,7 @@ public class Simulacao {
         embarcarAluno(tempoSimulacao, pontoEmbarque);
         criarAlunos(tempoSimulacao, pontoDesembarque);
         embarcarAluno(tempoSimulacao, pontoDesembarque);
-        movimentaFila(pontoEmbarque, tempoSimulacao);        
+        movimentaFila(pontoEmbarque, tempoSimulacao);
         movimentaFila(pontoDesembarque, tempoSimulacao);
     }
 
@@ -110,10 +110,10 @@ public class Simulacao {
             boolean aux = true;
             while (aux) {
                 aux = false;
-                for (int i = 0; i <= pontoParada.tamanhoFila()-1; i++) {
-                    if (pontoParada.atualizaFila(i)){
+                for (int i = 0; i <= pontoParada.tamanhoFila() - 1; i++) {
+                    if (pontoParada.atualizaFila(i)) {
                         aux = true;
-                        esperar(250);
+                        esperar(100);
                         janelaSimulacao.executarAcao();
                         movimentaMamute(tempoSimulacao, pontoEmbarque, pontoDesembarque);
 
@@ -131,16 +131,16 @@ public class Simulacao {
         }
     }
 
-    private void movimentaMamute(int tempoSimulacao,PontoParada ponto1, PontoParada ponto2){
+    private void movimentaMamute(int tempoSimulacao, PontoParada ponto1, PontoParada ponto2) {
         if (mamute.estaCheio()) {
-                mamute.realizarPercurso(tempoSimulacao, ponto1.getLocalizacaoAtual(),
-                        ponto2.getLocalizacaoAtual());
-                janelaSimulacao.executarAcao();
-                esperar(100);
-            }
+            mamute.realizarPercurso(tempoSimulacao, ponto1.getLocalizacaoAtual(),
+                    ponto2.getLocalizacaoAtual());
+            mapa.atualizarMapa(mamute);
+            esperar(100);
+        }
     }
 
-    private void atualizarPontoParada(PontoParada pontoParada){
+    private void atualizarPontoParada(PontoParada pontoParada) {
         for (Aluno a : pontoParada.getFila())
             mapa.atualizarMapa(a);
     }
