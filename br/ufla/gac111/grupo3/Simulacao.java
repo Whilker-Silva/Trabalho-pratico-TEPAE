@@ -53,22 +53,23 @@ public class Simulacao {
         janelaSimulacao.executarAcao();
         for (int i = 0; i < tempoSimulacao; i++) {
             executarUmPasso(i);
-            esperar(300);
         }
     }
 
     private void executarUmPasso(int tempoSimulacao) {
         criarAlunos(tempoSimulacao, pontoEmbarque);
-        embarcarAluno(tempoSimulacao, pontoEmbarque);
         criarAlunos(tempoSimulacao, pontoDesembarque);
+
+        embarcarAluno(tempoSimulacao, pontoEmbarque);
         embarcarAluno(tempoSimulacao, pontoDesembarque);
-        movimentaFila(pontoEmbarque, tempoSimulacao);
+
+        movimentaFila(pontoEmbarque, tempoSimulacao);        
         movimentaFila(pontoDesembarque, tempoSimulacao);
     }
 
     private void criarAlunos(int tempoSimulacao, PontoParada pontoParada) {
         Random e = new Random();
-        int qtdAlunos = e.nextInt(4);
+        int qtdAlunos = e.nextInt(3);
 
         if (!pontoParada.estaCheia()) {
             for (int i = 0; i < qtdAlunos; i++) {
@@ -76,12 +77,9 @@ public class Simulacao {
                 Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1,
                         pontoParada.getLocalizacaoAtual().getY());
                 Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
-                System.out.println(pontoParada.posicaoLivre());
                 atualizarPontoParada(pontoParada);
                 mapa.adicionarItem(aluno);
-                esperar(50);
                 pontoParada.adicionarAluno(aluno);
-                janelaSimulacao.executarAcao();
             }
         }
     }
@@ -96,7 +94,6 @@ public class Simulacao {
                 mamute.embarcarAluno(aluno, tempoSimulacao);
                 atualizarPontoParada(pontoParada);
                 mapa.removerItem(aluno);
-                esperar(100);
                 janelaSimulacao.executarAcao();
             }
         } else {
@@ -113,10 +110,7 @@ public class Simulacao {
                 for (int i = 0; i <= pontoParada.tamanhoFila() - 1; i++) {
                     if (pontoParada.atualizaFila(i)) {
                         aux = true;
-                        esperar(100);
-                        janelaSimulacao.executarAcao();
-                        movimentaMamute(tempoSimulacao, pontoEmbarque, pontoDesembarque);
-
+                        movimentaMamute(tempoSimulacao, pontoEmbarque, pontoDesembarque); 
                     }
                 }
             }
@@ -133,11 +127,11 @@ public class Simulacao {
 
     private void movimentaMamute(int tempoSimulacao, PontoParada ponto1, PontoParada ponto2) {
         if (mamute.estaCheio()) {
-            mamute.realizarPercurso(tempoSimulacao, ponto1.getLocalizacaoAtual(),
-                    ponto2.getLocalizacaoAtual());
-            mapa.atualizarMapa(mamute);
-            esperar(100);
+            mamute.realizarPercurso(tempoSimulacao, ponto1.getLocalizacaoAtual(), ponto2.getLocalizacaoAtual());
         }
+        esperar(50);
+        janelaSimulacao.executarAcao();
+        esperar(50);
     }
 
     private void atualizarPontoParada(PontoParada pontoParada) {
