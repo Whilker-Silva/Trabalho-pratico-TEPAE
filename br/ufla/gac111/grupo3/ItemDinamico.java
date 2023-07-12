@@ -1,7 +1,6 @@
 package br.ufla.gac111.grupo3;
 
-public class ItemDinamico extends Item {
-
+public abstract class ItemDinamico extends Item {
     private Localizacao localizacaoDestino;
 
     public ItemDinamico(Localizacao localizacaoAtual, Localizacao localizacaoDestino) {
