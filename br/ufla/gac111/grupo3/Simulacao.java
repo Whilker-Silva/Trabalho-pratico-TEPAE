@@ -91,13 +91,13 @@ public class Simulacao {
                 pontoParada.embarcarAluno();
             } else {
                 Aluno aluno = pontoParada.removerAluno();
-                mamute.embarcarAluno(aluno, tempoSimulacao);
+                mamute.embarcarAluno(aluno);
                 atualizarPontoParada(pontoParada);
                 mapa.removerItem(aluno);
                 janelaSimulacao.executarAcao();
             }
         } else {
-            movimentaMamute(tempoSimulacao, pontoEmbarque, pontoDesembarque);
+            movimentaMamute(pontoEmbarque, pontoDesembarque);
         }
     }
 
@@ -109,7 +109,7 @@ public class Simulacao {
                 for (int i = 0; i <= pontoParada.tamanhoFila() - 1; i++) {
                     if (pontoParada.atualizaFila(i)) {
                         aux = true;
-                        movimentaMamute(tempoSimulacao, pontoEmbarque, pontoDesembarque); 
+                        movimentaMamute(pontoEmbarque, pontoDesembarque); 
                     }
                 }
             }
@@ -124,10 +124,8 @@ public class Simulacao {
         }
     }
 
-    private void movimentaMamute(int tempoSimulacao, PontoParada ponto1, PontoParada ponto2) {
-        if (mamute.estaCheio()) {
-            mamute.realizarPercurso(tempoSimulacao, ponto1.getLocalizacaoAtual(), ponto2.getLocalizacaoAtual());
-        }
+    private void movimentaMamute(PontoParada ponto1, PontoParada ponto2) {
+        mamute.realizarPercurso(ponto1.getLocalizacaoAtual(), ponto2.getLocalizacaoAtual());
         esperar(50);
         janelaSimulacao.executarAcao();
         esperar(50);

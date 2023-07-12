@@ -34,7 +34,7 @@ public class PontoParada extends Item {
         return getPrimeiroAluno().getEmbarcou();
     }
 
-    public Aluno getPrimeiroAluno() {
+    private Aluno getPrimeiroAluno() {
         return filaAlunos.get(0);
     }
 
@@ -63,8 +63,7 @@ public class PontoParada extends Item {
     public Localizacao posicaoLivre() {
         if (!estaVazia()) {
             Aluno ultimoAluno = filaAlunos.get(filaAlunos.size() - 1);
-            return new Localizacao(ultimoAluno.getLocalizacaoAtual().getX(),
-                    ultimoAluno.getLocalizacaoAtual().getY() + 1);
+            return new Localizacao(ultimoAluno.getLocalizacaoAtual().getX(), ultimoAluno.getLocalizacaoAtual().getY() + 1);
         }
         return new Localizacao(getLocalizacaoAtual().getX() + 1, getLocalizacaoAtual().getY());
     }
@@ -86,5 +85,4 @@ public class PontoParada extends Item {
     public List<Aluno> getFila(){
         return Collections.unmodifiableList(filaAlunos);
     }
-
 }

@@ -21,10 +21,6 @@ public class Aluno extends ItemDinamico {
         return tempoEntrada;
     }
 
-    public boolean chegouDestino(){
-        return getLocalizacaoAtual().equals(getLocalizacaoDestino());
-    }
-
     public void setEmbarcou(){
         embarcou = true;
     }
@@ -32,5 +28,4 @@ public class Aluno extends ItemDinamico {
     public boolean getEmbarcou(){
         return embarcou;
     }
-
 }

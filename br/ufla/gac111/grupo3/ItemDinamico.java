@@ -25,4 +25,8 @@ public class ItemDinamico extends Item {
         }
     }
 
+    public boolean chegouDestino(){
+        return getLocalizacaoAtual().equals(getLocalizacaoDestino());
+    }
+
 }
