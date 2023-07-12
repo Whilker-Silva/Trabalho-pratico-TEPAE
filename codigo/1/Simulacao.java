@@ -46,8 +46,10 @@ public class Simulacao {
     private void executarUmPasso(int tempoSimulacao) {
         criarAlunos(tempoSimulacao, pontoEmbarque);
         embarcarAluno(tempoSimulacao, pontoEmbarque);
+        pontoEmbarque.moverFila();
         criarAlunos(tempoSimulacao, pontoDesembarque);
         embarcarAluno(tempoSimulacao, pontoDesembarque);
+        pontoEmbarque.moverFila();
 
         janelaSimulacao.executarAcao();
     }

@@ -18,7 +18,7 @@ public class Aluno extends ItemDinamico {
     }
 
     public void setPosiacoFila(Localizacao localizacaoAtual) {
-        // fazer o set posicaoFila
+        this.localizacaoAtual = localizacaoAtual;
     }
 
     public Localizacao getProximalocalizao() {

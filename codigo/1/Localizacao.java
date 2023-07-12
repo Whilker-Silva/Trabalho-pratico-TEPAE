@@ -29,6 +29,10 @@ public class Localizacao {
         return y;
     }
 
+    public void setY(int y){
+        this.y = y;
+    }
+
     /**
      * Gera a localizacao para se mover visando alcançar o destino
      * 

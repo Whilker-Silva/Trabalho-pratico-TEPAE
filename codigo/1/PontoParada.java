@@ -87,4 +87,10 @@ public class PontoParada extends Item {
         return filaAlunos.size();
     }
 
+    public void moverFila(){
+        for(int i = 0; i< filaAlunos.size() ; i++ ){//percorrer a fila
+            filaAlunos.get(i).setPosiacoFila(new Localizacao(getLocalizacaoAtual().getX(), getLocalizacaoAtual().getY()+1));
+        }
+    }
+
 }
