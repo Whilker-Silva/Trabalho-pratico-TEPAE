@@ -28,7 +28,15 @@ public class Localizacao {
     public int getY() {
         return y;
     }
+
+    public void setX(int x){
+        this.x = x;
+    }
     
+    public void setY(int y){
+        this.y = y;
+    }
+
     /**
      * Gera a localizacao para se mover visando alcançar o destino
      * @param localizacaoDestino: localizacao que se deseja alcancar.
