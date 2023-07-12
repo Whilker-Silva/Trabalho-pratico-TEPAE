@@ -22,7 +22,7 @@ public class PontoParada extends Item {
         super(localizacao);
         filaAlunos = new ArrayList<Aluno>();
 
-        setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus.png")).getImage());
+        setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus2.png")).getImage());
     }
 
     public Aluno removerAluno() {

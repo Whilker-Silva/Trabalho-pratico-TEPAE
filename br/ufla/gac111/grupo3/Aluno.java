@@ -13,7 +13,7 @@ public class Aluno extends ItemDinamico {
 
     public Aluno(Localizacao localizacaoAtual, Localizacao localizacaoDestino, int tempoEntrada) {
         super(localizacaoAtual, localizacaoDestino);
-        setImagem(new ImageIcon(getClass().getResource("Imagens/Pessoa.png")).getImage());
+        setImagem(new ImageIcon(getClass().getResource("Imagens/Pessoa2.png")).getImage());
         this.tempoEntrada = tempoEntrada;
     }
 

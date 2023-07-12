@@ -23,32 +23,12 @@ public class Simulacao {
     private Cachorro cachorro;
     private ArrayList<Item> decoracao;
 
-
     private static Simulacao instanciaUnica;
 
     private Simulacao() {
-        mapa = new Mapa(40, 40);
-
-        pontoEmbarque = new PontoParada(new Localizacao(35, 1));
-        mapa.adicionarItem(pontoEmbarque);
-
-
-        pontoDesembarque = new PontoParada(new Localizacao(5, 1));
-        mapa.adicionarItem(pontoDesembarque);
-
-        Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
-        Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
-
-
-        Localizacao posInicial = new Localizacao(ponto1.getX() + 1, ponto1.getY() - 1);
-        Localizacao posFinal = new Localizacao(ponto2.getX() + 1, ponto2.getY() - 1);
-
-        mamute = new Mamute(posInicial, posFinal);
-        mapa.adicionarItem(mamute);
-
-        
-        criaItensDecoracao();
-
+        mapa = new Mapa(22, 22);
+        criaItensSimulacao();
+        criaItensDecoracao(pontoEmbarque,pontoDesembarque);
         janelaSimulacao = new JanelaSimulacao(mapa);
     }
 
@@ -69,8 +49,6 @@ public class Simulacao {
     private void executarUmPasso(int tempoSimulacao) {
         criarAlunos(tempoSimulacao, pontoEmbarque);
         criarAlunos(tempoSimulacao, pontoDesembarque);
-
-        moverCachorro();
 
         embarcarAluno(tempoSimulacao, pontoEmbarque);
         embarcarAluno(tempoSimulacao, pontoDesembarque);
@@ -109,6 +87,8 @@ public class Simulacao {
             }
         } else {
             movimentaMamute(pontoEmbarque, pontoDesembarque);
+            moverCachorro();
+
         }
     }
 
@@ -149,18 +129,18 @@ public class Simulacao {
     }
 
     private void moverCachorro(){
-        cachorro.realizarPercurso(new Localizacao(32, 2), new Localizacao(8, 2));
+        cachorro.realizarPercurso(new Localizacao(15, 2), new Localizacao(4, 2));
     }
 
-    private void criaItensDecoracao(){
+    private void criaItensDecoracao(PontoParada pontoEsquerda, PontoParada pontoDireita){
         decoracao = new ArrayList<Item>();
-        int inicio = 11;
+        int inicio = 5;
         int y = 4;
 
-        cachorro = new Cachorro(new Localizacao(32, y-2), new Localizacao(8, y-2));
+        cachorro = new Cachorro(new Localizacao(20, y-2), new Localizacao(4, y-2));
         mapa.adicionarItem(cachorro);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             decoracao.add(new Decoracao(new Localizacao((inicio+0)+6*i, y-1),"Imagens/Arvore1.png"));
             decoracao.add(new Decoracao(new Localizacao((inicio+1)+6*i, y),"Imagens/Casa1.png"));
             decoracao.add(new Decoracao(new Localizacao((inicio+2)+6*i, y),"Imagens/Casa2.png"));
@@ -168,8 +148,32 @@ public class Simulacao {
             decoracao.add(new Decoracao(new Localizacao((inicio+4)+6*i, y-1),"Imagens/Arvore2.png"));
 
         }
+
+        for (int i = pontoEsquerda.getLocalizacaoAtual().getX()+2; i <= pontoDireita.getLocalizacaoAtual().getX()-1; i++) {
+            decoracao.add(new Decoracao(new Localizacao(i, pontoDireita.getLocalizacaoAtual().getY()), "Imagens/Asfalto.png"));
+        }
+
         for (Item i : decoracao)
             mapa.adicionarItem(i);
+    }
+
+    private void criaItensSimulacao(){
+        pontoEmbarque = new PontoParada(new Localizacao(1, 1));
+        mapa.adicionarItem(pontoEmbarque);
+
+
+        pontoDesembarque = new PontoParada(new Localizacao(18, 1));
+        mapa.adicionarItem(pontoDesembarque);
+
+        Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
+        Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
+
+
+        Localizacao posInicial = new Localizacao(ponto1.getX() + 1, ponto1.getY() - 1);
+        Localizacao posFinal = new Localizacao(ponto2.getX() + 1, ponto2.getY() - 1);
+
+        mamute = new Mamute(posInicial, posFinal);
+        mapa.adicionarItem(mamute);
     }
 
 }
