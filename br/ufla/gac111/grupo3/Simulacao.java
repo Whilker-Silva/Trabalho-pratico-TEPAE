@@ -2,6 +2,8 @@ package br.ufla.gac111.grupo3;
 
 import java.util.Random;
 
+import javax.sound.sampled.Port;
+
 /**
  * Responsavel pela simulacao.
  * <p>
@@ -19,6 +21,8 @@ public class Simulacao {
     private Mamute mamute;
     private PontoParada pontoEmbarque;
     private PontoParada pontoDesembarque;
+    private Cachorro cachorro;
+
 
     private static Simulacao instanciaUnica;
 
@@ -28,11 +32,15 @@ public class Simulacao {
         pontoEmbarque = new PontoParada(new Localizacao(35, 1));
         mapa.adicionarItem(pontoEmbarque);
 
+        cachorro = new Cachorro(new Localizacao(8, 3), new Localizacao(8, 3));
+        mapa.adicionarItem(cachorro);
+
         pontoDesembarque = new PontoParada(new Localizacao(5, 1));
         mapa.adicionarItem(pontoDesembarque);
 
         Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
         Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
+
 
         Localizacao posInicial = new Localizacao(ponto1.getX() + 1, ponto1.getY() - 1);
         Localizacao posFinal = new Localizacao(ponto2.getX() + 1, ponto2.getY() - 1);
@@ -60,6 +68,8 @@ public class Simulacao {
     private void executarUmPasso(int tempoSimulacao) {
         criarAlunos(tempoSimulacao, pontoEmbarque);
         criarAlunos(tempoSimulacao, pontoDesembarque);
+
+        moverCachorro();
 
         embarcarAluno(tempoSimulacao, pontoEmbarque);
         embarcarAluno(tempoSimulacao, pontoDesembarque);
@@ -134,5 +144,13 @@ public class Simulacao {
     private void atualizarPontoParada(PontoParada pontoParada) {
         for (Aluno a : pontoParada.getFila())
             mapa.atualizarMapa(a);
+    }
+
+
+    private void moverCachorro(){
+        mapa.removerItem(cachorro);
+        cachorro.andar();
+        mapa.adicionarItem(cachorro);
+
     }
 }
