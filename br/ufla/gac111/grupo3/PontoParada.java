@@ -31,8 +31,6 @@ public class PontoParada extends Item {
     }
 
     public boolean alunoEmbarcado() {
-        if (filaAlunos.isEmpty())
-            return false;
         return getPrimeiroAluno().getEmbarcou();
     }
 
@@ -40,9 +38,12 @@ public class PontoParada extends Item {
         return filaAlunos.get(0);
     }
 
+    public int getPrimeiroTempoEntrada(){
+        return getPrimeiroAluno().getTempoEntrada();
+    }
+
     public void embarcarAluno() {
-        if (!estaVazia())
-            getPrimeiroAluno().setEmbarcou();
+        getPrimeiroAluno().setEmbarcou();
     }
 
     public void adicionarAluno(Aluno aluno) {
@@ -70,13 +71,6 @@ public class PontoParada extends Item {
 
     public boolean atualizaFila(int i) {
         Aluno aluno = filaAlunos.get(i);
-        //System.out.print((i+1) + ": ");
-        //System.out.println(aluno.getLocalizacaoAtual());
-        // System.out.print("aluno " + i + ": ");
-        // System.out.println(aluno.getLocalizacaoAtual());
-        // System.out.println("posicao meta: ");
-        // System.out.println(new Localizacao(getLocalizacaoAtual().getX()+1,
-        // getLocalizacaoAtual().getY()+i));
         Localizacao localizacao = new Localizacao(getLocalizacaoAtual().getX() + 1, getLocalizacaoAtual().getY() + i);
         if (!aluno.getLocalizacaoAtual().equals(localizacao)) {
             aluno.executarAcao();

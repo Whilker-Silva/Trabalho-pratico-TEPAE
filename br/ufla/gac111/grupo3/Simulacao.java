@@ -27,10 +27,11 @@ public class Simulacao {
 
         pontoEmbarque = new PontoParada(new Localizacao(35, 1));
         mapa.adicionarItem(pontoEmbarque);
-        Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
 
         pontoDesembarque = new PontoParada(new Localizacao(5, 1));
         mapa.adicionarItem(pontoDesembarque);
+
+        Localizacao ponto1 = pontoEmbarque.getLocalizacaoAtual();
         Localizacao ponto2 = pontoDesembarque.getLocalizacaoAtual();
 
         Localizacao posInicial = new Localizacao(ponto1.getX() + 1, ponto1.getY() - 1);
@@ -69,17 +70,16 @@ public class Simulacao {
 
     private void criarAlunos(int tempoSimulacao, PontoParada pontoParada) {
         Random e = new Random();
-        int qtdAlunos = e.nextInt(3);
+        int qtdAlunos = e.nextInt(2);
 
         if (!pontoParada.estaCheia()) {
             for (int i = 0; i < qtdAlunos; i++) {
                 int tempoEntrada = e.nextInt(2) + 1;
-                Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1,
-                        pontoParada.getLocalizacaoAtual().getY());
+                Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1, pontoParada.getLocalizacaoAtual().getY());
                 Aluno aluno = new Aluno(pontoParada.posicaoLivre(), inicioFila, tempoEntrada);
+                pontoParada.adicionarAluno(aluno);
                 atualizarPontoParada(pontoParada);
                 mapa.adicionarItem(aluno);
-                pontoParada.adicionarAluno(aluno);
             }
         }
     }
@@ -87,7 +87,7 @@ public class Simulacao {
     private void embarcarAluno(int tempoSimulacao, PontoParada pontoParada) {
         if (mamute.estaDisponivel(tempoSimulacao, pontoParada) && !pontoParada.estaVazia()) {
             if (!pontoParada.alunoEmbarcado()) {
-                mamute.setTempoProximaEntrada(pontoParada.getPrimeiroAluno().getTempoEntrada(), tempoSimulacao);
+                mamute.setTempoProximaEntrada(pontoParada.getPrimeiroTempoEntrada(), tempoSimulacao);
                 pontoParada.embarcarAluno();
             } else {
                 Aluno aluno = pontoParada.removerAluno();
@@ -102,7 +102,6 @@ public class Simulacao {
     }
 
     private void movimentaFila(PontoParada pontoParada, int tempoSimulacao) {
-
         if (!pontoParada.estaVazia()) {
             boolean aux = true;
             while (aux) {
