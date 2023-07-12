@@ -1,8 +1,7 @@
 package br.ufla.gac111.grupo3;
 
+import java.util.ArrayList;
 import java.util.Random;
-
-import javax.sound.sampled.Port;
 
 /**
  * Responsavel pela simulacao.
@@ -22,6 +21,7 @@ public class Simulacao {
     private PontoParada pontoEmbarque;
     private PontoParada pontoDesembarque;
     private Cachorro cachorro;
+    private ArrayList<Item> decoracao;
 
 
     private static Simulacao instanciaUnica;
@@ -32,8 +32,6 @@ public class Simulacao {
         pontoEmbarque = new PontoParada(new Localizacao(35, 1));
         mapa.adicionarItem(pontoEmbarque);
 
-        cachorro = new Cachorro(new Localizacao(8, 3), new Localizacao(8, 3));
-        mapa.adicionarItem(cachorro);
 
         pontoDesembarque = new PontoParada(new Localizacao(5, 1));
         mapa.adicionarItem(pontoDesembarque);
@@ -47,6 +45,9 @@ public class Simulacao {
 
         mamute = new Mamute(posInicial, posFinal);
         mapa.adicionarItem(mamute);
+
+        
+        criaItensDecoracao();
 
         janelaSimulacao = new JanelaSimulacao(mapa);
     }
@@ -120,6 +121,7 @@ public class Simulacao {
                     if (pontoParada.atualizaFila(i)) {
                         aux = true;
                         movimentaMamute(pontoEmbarque, pontoDesembarque); 
+                        moverCachorro();
                     }
                 }
             }
@@ -146,11 +148,28 @@ public class Simulacao {
             mapa.atualizarMapa(a);
     }
 
-
     private void moverCachorro(){
-        mapa.removerItem(cachorro);
-        cachorro.andar();
+        cachorro.realizarPercurso(new Localizacao(32, 2), new Localizacao(8, 2));
+    }
+
+    private void criaItensDecoracao(){
+        decoracao = new ArrayList<Item>();
+        int inicio = 11;
+        int y = 4;
+
+        cachorro = new Cachorro(new Localizacao(32, y-2), new Localizacao(8, y-2));
         mapa.adicionarItem(cachorro);
 
+        for (int i = 0; i < 4; i++) {
+            decoracao.add(new Decoracao(new Localizacao((inicio+0)+6*i, y-1),"Imagens/Arvore1.png"));
+            decoracao.add(new Decoracao(new Localizacao((inicio+1)+6*i, y),"Imagens/Casa1.png"));
+            decoracao.add(new Decoracao(new Localizacao((inicio+2)+6*i, y),"Imagens/Casa2.png"));
+            decoracao.add(new Decoracao(new Localizacao((inicio+3)+6*i, y),"Imagens/Casa3.png"));
+            decoracao.add(new Decoracao(new Localizacao((inicio+4)+6*i, y-1),"Imagens/Arvore2.png"));
+
+        }
+        for (Item i : decoracao)
+            mapa.adicionarItem(i);
     }
+
 }

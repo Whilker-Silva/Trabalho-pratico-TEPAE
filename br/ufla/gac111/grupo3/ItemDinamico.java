@@ -27,5 +27,15 @@ public abstract class ItemDinamico extends Item {
     public boolean chegouDestino(){
         return getLocalizacaoAtual().equals(getLocalizacaoDestino());
     }
+    
+    public boolean estaPosicionado(Localizacao pontoParada){
+        return getLocalizacaoAtual().equals(pontoParada);
+    }
 
+    public void trocaDestino(Localizacao localizacaoPonto1, Localizacao localizacaoPonto2){
+        if(estaPosicionado(localizacaoPonto1))
+            setLocalizacaoDestino(localizacaoPonto2);
+        else if(estaPosicionado(localizacaoPonto2))
+            setLocalizacaoDestino(localizacaoPonto1);
+    }
 }
