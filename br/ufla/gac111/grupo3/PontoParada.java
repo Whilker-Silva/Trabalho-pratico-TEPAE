@@ -46,7 +46,7 @@ public class PontoParada extends Item {
         return getPrimeiroAluno().getEmbarcou();
     }
 
-    private Aluno getPrimeiroAluno() {
+    public Aluno getPrimeiroAluno() {
         return filaAlunos.get(0);
     }
 
