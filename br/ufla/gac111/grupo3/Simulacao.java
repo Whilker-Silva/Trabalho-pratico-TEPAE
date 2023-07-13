@@ -61,7 +61,7 @@ public class Simulacao {
         Random e = new Random();
         int qtdAlunos = e.nextInt(4);
 
-        if (!pontoParada.estaCheia()) {
+        if (!pontoParada.estaCheia() && tempoSimulacao%4 == 0) {
             for (int i = 0; i < qtdAlunos; i++) {
                 int tempoEntrada = e.nextInt(2) + 1;
                 Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1, pontoParada.getLocalizacaoAtual().getY());
