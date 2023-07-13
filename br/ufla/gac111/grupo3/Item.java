@@ -13,6 +13,8 @@ public abstract class Item {
     private Image imagem;
 
     // Atribui uma localizacao ao atributo localizacaoAtual
+
+    
     public Item(Localizacao localizacaoAtual) {
         this.localizacaoAtual = localizacaoAtual;
     }
