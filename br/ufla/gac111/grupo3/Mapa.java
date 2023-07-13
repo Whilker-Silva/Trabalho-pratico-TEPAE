@@ -7,6 +7,7 @@ package br.ufla.gac111.grupo3;
  * dimensões são informadas por paramentro
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author Whilker Henrique Dos Santos Silva
  */
 public class Mapa {
 

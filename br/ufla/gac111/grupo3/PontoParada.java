@@ -22,7 +22,7 @@ public class PontoParada extends Item {
         super(localizacao);
         filaAlunos = new ArrayList<Aluno>();
 
-        setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus.png")).getImage());
+        setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus2.png")).getImage());
     }
 
     /**
@@ -46,13 +46,7 @@ public class PontoParada extends Item {
         return getPrimeiroAluno().getEmbarcou();
     }
 
-    /**
-     * Método que retorna o primeiro aluno da fila.
-     * 
-     * @return primeiro aluno da fila.
-     */
-
-    private Aluno getPrimeiroAluno() {
+    public Aluno getPrimeiroAluno() {
         return filaAlunos.get(0);
     }
 

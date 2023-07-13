@@ -7,6 +7,7 @@ import javax.swing.*;
  * Fornece a visualizacao da simulacao
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
+
 public class JanelaSimulacao extends JFrame{
     private Mapa mapa;
     private VisaoMapa visaoMapa;
@@ -31,7 +32,8 @@ public class JanelaSimulacao extends JFrame{
                 if(mapa.getItem(i, j) != null){//Se existir algum objeto na posicao (i,j)
                     Item item = mapa.getItem(i, j);
                     Localizacao localizacao = item.getLocalizacaoAtual();
-                    System.out.println(item.getLocalizacaoAtual());
+                    if(item instanceof Aluno)
+                        System.out.println(item.getLocalizacaoAtual());
                     visaoMapa.desenharImagem(localizacao.getX(), localizacao.getY(), item.getImagem());
                 }
             }
