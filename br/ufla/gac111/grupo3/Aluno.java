@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  * @author Whilker Henrique Dos Santos Silva
  */
+
 public class Aluno extends ItemDinamico {
     private int tempoEntrada;
     private boolean embarcou;
@@ -22,6 +23,7 @@ public class Aluno extends ItemDinamico {
      * @param localizacaoDestino
      * @param tempoEntrada
      */
+
     public Aluno(Localizacao localizacaoAtual, Localizacao localizacaoDestino, int tempoEntrada) {
         super(localizacaoAtual, localizacaoDestino);
         setImagem(new ImageIcon(getClass().getResource("Imagens/Pessoa2.png")).getImage());
@@ -33,6 +35,7 @@ public class Aluno extends ItemDinamico {
      * 
      * @return tempoEntrada: int
      */
+
     public int getTempoEntrada() {
         return tempoEntrada;
     }
@@ -43,6 +46,7 @@ public class Aluno extends ItemDinamico {
      * <p>
      * Dessa forma este método é responsável por mudar o estado para TRUE
      */
+
     public void setEmbarcou() {
         embarcou = true;
     }
@@ -52,6 +56,7 @@ public class Aluno extends ItemDinamico {
      * 
      * @return embarcou: boolean
      */
+
     public boolean getEmbarcou() {
         return embarcou;
     }
