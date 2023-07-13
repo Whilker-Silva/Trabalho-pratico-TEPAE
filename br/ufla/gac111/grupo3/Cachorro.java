@@ -3,25 +3,25 @@ package br.ufla.gac111.grupo3;
 import javax.swing.ImageIcon;
 
 /**
- * Cachorro é uma classe responsavel pela criação e movimentaçao do objeto
- * Cachorro
+ * Representa o cachorro da simulação.
+ * <p>
+ * Na simulacão, cachorro é considerado um item que se move, dessa forma a classe
+ * cachorro herda de itemDinamico, que herda de item.
  * 
- * @author Pedro Henrique Pigozzi Gomes
+ * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author Mateus Henrique Teixeira
  */
 
 public class Cachorro extends ItemDinamico implements MovimentacaoPercurso {
-
+    
     /**
      * Construtor de objetos do tipo Cachorro
      * <p>
      * Recebe por parametro duas variaveis do tipo Localizacao e as atribui as
      * variáveis
      * localizacaoAtual e a localizacaoDestino.
-     * 
-     * @param localizacao        Localizacao que será atribuida a variável
-     *                           localizacaoAtual
-     * @param localizacaoDestino Localizacao que será atribuida a variável
-     *                           localizacaoDestino
+     * @param localizacao - Localizacao que será atribuida a variável localizacaoAtual
+     * @param localizacaoDestino - Localizacao que será atribuida a variável localizacaoDestino
      */
 
     public Cachorro(Localizacao localizacao, Localizacao localizacaoDestino) {
@@ -30,11 +30,9 @@ public class Cachorro extends ItemDinamico implements MovimentacaoPercurso {
     }
 
     /**
-     * Recebe por parametros duas variaveis do tipo Localizacao
-     * e realiza a ação de movimentar o Objeto pelo mapa,
-     * logo depois realiza a função trocarDestino que, caso o Cachorro tenha chegado
-     * em seu destino,
-     * ele troca o destino do ponto1 para o ponto2
+     * Realiza a ação de movimentar o cachorro pelo mapa, do ponto1 ao ponto2, intermitentemente.
+     * @param localizacaoPonto1 - Localizacao do primeiro ponto
+     * @param localizacaoPonto2 - Localizacao do segundo ponto
      */
 
     @Override

@@ -1,13 +1,12 @@
 package br.ufla.gac111.grupo3;
 
 /**
- * Interface que contém o método realizarPercurso
+ * Interface de objetos dinâmicos que realizam percurso de ida e volta.
  */
 public interface MovimentacaoPercurso {
 
     /**
      * Ação de realizar um percurso entre dois pontos
-     * 
      * @param localizacaoPonto1
      * @param localizacaoPonto2
      */
