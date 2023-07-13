@@ -136,7 +136,6 @@ public class Simulacao {
                 Aluno aluno = pontoParada.removerAluno();
                 mamute.embarcarAluno(aluno);
                 mapa.removerItem(aluno);
-                System.out.println(pontoParada.tamanhoFila());
                 atualizarPontoParada(pontoParada);
                 janelaSimulacao.executarAcao();
             }
