@@ -59,9 +59,9 @@ public class Simulacao {
 
     private void criarAlunos(int tempoSimulacao, PontoParada pontoParada) {
         Random e = new Random();
-        int qtdAlunos = e.nextInt(2);
+        int qtdAlunos = e.nextInt(4);
 
-        if (!pontoParada.estaCheia()) {
+        if (!pontoParada.estaCheia() && tempoSimulacao%7 == 0) {
             for (int i = 0; i < qtdAlunos; i++) {
                 int tempoEntrada = e.nextInt(2) + 1;
                 Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1, pontoParada.getLocalizacaoAtual().getY());
@@ -81,8 +81,9 @@ public class Simulacao {
             } else {
                 Aluno aluno = pontoParada.removerAluno();
                 mamute.embarcarAluno(aluno);
-                atualizarPontoParada(pontoParada);
                 mapa.removerItem(aluno);
+                System.out.println(pontoParada.tamanhoFila());
+                //atualizarPontoParada(pontoParada);
                 janelaSimulacao.executarAcao();
             }
         } else {
