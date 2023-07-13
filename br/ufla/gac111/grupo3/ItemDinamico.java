@@ -1,7 +1,7 @@
 package br.ufla.gac111.grupo3;
 
 /**
- * ItemDinamico é classe que representa todos os itens que tem movimento dentro
+ * Representa todos os itens que tem movimento dentro
  * da simulação possuindo uma localizacao atual e uma localizacao de destino.
  * @author Pedro Henrique Pigozzi Gomes
  */
