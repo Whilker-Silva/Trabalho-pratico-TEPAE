@@ -1,12 +1,11 @@
 package br.ufla.gac111.grupo3;
 
 import java.awt.Image;
-
 /**
  * Item é uma classe abstrata que reprensenta todos o itens presentes na
  * simulação
+ * @author Pedro Henrique Pigozzi Gomes
  */
-
 public abstract class Item {
     // Atributos
     private Localizacao localizacaoAtual;
