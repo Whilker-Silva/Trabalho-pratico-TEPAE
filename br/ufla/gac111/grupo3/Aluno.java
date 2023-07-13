@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
  */
 
 public class Aluno extends ItemDinamico {
+    
+    //Atributos
     private int tempoEntrada;
     private boolean embarcou;
 
