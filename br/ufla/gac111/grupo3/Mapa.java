@@ -30,26 +30,60 @@ public class Mapa {
         itens = new Item[altura][largura];
     }
 
+    /**
+     * Adiicona um item ao mapa na localização atual do item
+     * 
+     * @param i
+     */
+
     public void adicionarItem(Item i) {
         itens[i.getLocalizacaoAtual().getX()][i.getLocalizacaoAtual().getY()] = i;
     }
+
+    /**
+     * Remove um item do mapa na localização atual do item
+     * 
+     * @param i
+     */
 
     public void removerItem(Item i) {
         itens[i.getLocalizacaoAtual().getX()][i.getLocalizacaoAtual().getY()] = null;
     }
 
+    /**
+     * Remove um item no mapa e o adiciona novamente em sua nova localização
+     * 
+     * @param i
+     */
     public void atualizarMapa(Item i) {
         removerItem(i);
         adicionarItem(i);
     }
 
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return
+     */
+
     public Item getItem(int x, int y) {
         return itens[x][y];
     }
 
+    /**
+     * 
+     * @return
+     */
+
     public int getLargura() {
         return largura;
     }
+
+    /**
+     * 
+     * @return
+     */
 
     public int getAltura() {
         return altura;
