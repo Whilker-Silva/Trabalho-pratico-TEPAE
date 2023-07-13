@@ -12,11 +12,20 @@ import javax.swing.ImageIcon;
  * Ponto de parada se diferencia dos demais itens pois nele há uma lista de
  * alunos na qual representa a fila
  */
+
 public class PontoParada extends Item {
 
     // Atributos
     private ArrayList<Aluno> filaAlunos;
     private final int CAPACIDADE = 15;
+
+    /**
+     * Método construtor.
+     * Recebe o construtor da classe Item.
+     * Inicializa filaAlunos
+     * 
+     * @param localizacao
+     */
 
     public PontoParada(Localizacao localizacao) {
         super(localizacao);
@@ -42,6 +51,7 @@ public class PontoParada extends Item {
      * 
      * @return boolean - true se o primeiro da fila embarcou, se não, retorna false.
      */
+
     public boolean alunoEmbarcado() {
         return getPrimeiroAluno().getEmbarcou();
     }
@@ -104,6 +114,7 @@ public class PontoParada extends Item {
      * 
      * @return
      */
+
     public Localizacao posicaoLivre() {
         if (!estaVazia()) {
             Aluno ultimoAluno = filaAlunos.get(filaAlunos.size() - 1);
@@ -112,6 +123,17 @@ public class PontoParada extends Item {
         }
         return new Localizacao(getLocalizacaoAtual().getX() + 1, getLocalizacaoAtual().getY());
     }
+
+    /**
+     * Método que atualiza a posição de um aluno na fila.
+     * Recebe o aluno da fila e cria uma nova localização com as coordenadas x e y.
+     * Verifica se a localização atual do aluno é diferente da nova localização.
+     * 
+     * @param i
+     * @return boolean - true se a localização atual do aluno for diferente da nova
+     *         localização, chamando assim o método executarAcao(). Se não, retorna
+     *         false.
+     */
 
     public boolean atualizaFila(int i) {
         Aluno aluno = filaAlunos.get(i);
@@ -123,9 +145,22 @@ public class PontoParada extends Item {
         return false;
     }
 
+    /**
+     * Método para verificar o número de alunos presentes no ArrayList.
+     * 
+     * @return tamanho da fila de alunos.
+     */
+
     public int tamanhoFila() {
         return filaAlunos.size();
     }
+
+    /**
+     * Método que retorna uma cópia da fila de alunos presente no ArrayList.
+     * A fila de alunos não pode ser modificada fora da classe.
+     * 
+     * @return cópia da fila de alunos.
+     */
 
     public List<Aluno> getFila() {
         return Collections.unmodifiableList(filaAlunos);
