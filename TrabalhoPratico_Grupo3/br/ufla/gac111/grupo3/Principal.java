@@ -1,4 +1,4 @@
-package br.ufla.gac111.grupo3;
+package TrabalhoPratico_Grupo3.br.ufla.gac111.grupo3;
 
 /**
  * Contém o método main, responsável apenas por instanciar o objeto
