@@ -203,7 +203,7 @@ public class Simulacao {
 
     /**
      * Atualiza a posição dos alunos no ponto de parada no mapa
-     * @param pontoParada
+     * @param pontoParada - PontoParada que se deseja atualizar
      */
 
     private void atualizarPontoParada(PontoParada pontoParada) {
@@ -224,7 +224,7 @@ public class Simulacao {
      * <p>
      * Cria um cachorro, o asfalto e uma sequência de árvores e casas em posições específcas.
      * @param pontoEsquerda - Localizacao do ponto a esquerda
-     * @param pontoDireita - - Localizacao do ponto a direita
+     * @param pontoDireita - Localizacao do ponto a direita
      */
 
     private void criaItensDecoracao(PontoParada pontoEsquerda, PontoParada pontoDireita) {
