@@ -25,11 +25,23 @@ public class PontoParada extends Item {
         setImagem(new ImageIcon(getClass().getResource("Imagens/PontoOnibus2.png")).getImage());
     }
 
+    /**
+     * Remove o primeiro aluno da fila de alunos.
+     * O primeiro aluno é removido usando o método remove(0) do ArrayList.
+     * 
+     * @return aluno removido.
+     */
+
     public Aluno removerAluno() {
         Aluno removido = filaAlunos.remove(0);
         return removido;
     }
 
+    /**
+     * Método que verifica se o primeiro da fila embarcou.
+     * 
+     * @return boolean - true se o primeiro da fila embarcou, se não, retorna false.
+     */
     public boolean alunoEmbarcado() {
         return getPrimeiroAluno().getEmbarcou();
     }
@@ -38,7 +50,7 @@ public class PontoParada extends Item {
         return filaAlunos.get(0);
     }
 
-    public int getPrimeiroTempoEntrada(){
+    public int getPrimeiroTempoEntrada() {
         return getPrimeiroAluno().getTempoEntrada();
     }
 
@@ -63,7 +75,8 @@ public class PontoParada extends Item {
     public Localizacao posicaoLivre() {
         if (!estaVazia()) {
             Aluno ultimoAluno = filaAlunos.get(filaAlunos.size() - 1);
-            return new Localizacao(ultimoAluno.getLocalizacaoAtual().getX(), ultimoAluno.getLocalizacaoAtual().getY() + 1);
+            return new Localizacao(ultimoAluno.getLocalizacaoAtual().getX(),
+                    ultimoAluno.getLocalizacaoAtual().getY() + 1);
         }
         return new Localizacao(getLocalizacaoAtual().getX() + 1, getLocalizacaoAtual().getY());
     }
@@ -82,7 +95,7 @@ public class PontoParada extends Item {
         return filaAlunos.size();
     }
 
-    public List<Aluno> getFila(){
+    public List<Aluno> getFila() {
         return Collections.unmodifiableList(filaAlunos);
     }
 }
