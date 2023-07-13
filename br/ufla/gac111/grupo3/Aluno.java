@@ -21,11 +21,11 @@ public class Aluno extends ItemDinamico {
         return tempoEntrada;
     }
 
-    public void setEmbarcou(){
+    public void setEmbarcou() {
         embarcou = true;
     }
 
-    public boolean getEmbarcou(){
+    public boolean getEmbarcou() {
         return embarcou;
     }
 }
