@@ -11,8 +11,8 @@ import java.util.Random;
 public class Localizacao {
     private int x;
     private int y;
-    private static Random rand = new Random();
-
+    private static Random rand;
+    
     /**
      * Representa uma localização na cidade
      * 
@@ -21,6 +21,7 @@ public class Localizacao {
      */
 
     public Localizacao(int x, int y) {
+        rand = new Random();
         this.x = x;
         this.y = y;
     }

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Responsavel pela simulacao.
- * <p>
- * Importante obeservar que foi usado o padrão de projeto singleton para essa
- * clase, dessa forma é possível instanciar apenas um único objeto do tipo
- * Simulacao
- * 
+ * Simula todo o sistema do mamute.
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
+ * @author Mateus Henrique Teixeira
+ * @author Whilker Henrique dos Santos Silva 
+ * @author Victor Hugo Daia Lorenzato
+ * @author Pedro Henrique Pigozzi Gomes 
  */
 
 public class Simulacao {
 
+    //Atributos
     private JanelaSimulacao janelaSimulacao;
     private Mapa mapa;
     private Mamute mamute;
@@ -26,8 +26,11 @@ public class Simulacao {
     private static Simulacao instanciaUnica;
 
     /**
-     * -/-/-/-/-
+     * Construtor do objeto Simulacao
+     * <p>
+     * Instancia objetos do tipo Mapa, JanelaSimulacao e os demais objetos da simulação e da decoração do mapa.
      */
+
     private Simulacao() {
         mapa = new Mapa(22, 22);
         criaItensSimulacao();
@@ -36,11 +39,12 @@ public class Simulacao {
     }
 
     /**
+     * Instância única de Simulacao
+     * <p>
      * Implementa o padrão de projeto Singleton para garantir que apenas
      * uma instância da classe Simulacao seja criada.
-     * <p>
      * 
-     * @return Única instância da classe Simulacao caso já tenha sido criada.
+     * @return Simulacao - Única instância da classe Simulacao caso já tenha sido criada
      */
 
     public static Simulacao getInstance() {
@@ -53,12 +57,10 @@ public class Simulacao {
     /**
      * Inicia a execução da simulação
      * <p>
-     * Chama o método executarAcao() da janela de simulação para exbir a janela.
-     * Inicia um loop que executa o excutarumPasso() para cada tempo de simulação.
-     * O número de etapas é determinado pelo parâmetro tempoSimulacao.
-     * 
-     * @param tempoSimulacao
-     * @param qtdAlunosMax
+     * Atualiza a janela de simulação, para que todos os objetos criados no construtor sejam colocados na tela.
+     * Além disso, inicia um loop que executa passo a passo da simulação.
+     * @param tempoSimulacao - inteiro que define a quantidade de passos que serão executados da simulação
+     * @param qtdAlunosMax - inteiro que define a quantidade máxima de alunos que serão criados por tempo de simulação
      */
 
     public void executarSimulacao(int tempoSimulacao, int qtdAlunosMax) {
@@ -69,13 +71,12 @@ public class Simulacao {
     }
 
     /**
-     * Representa um passo do aluno na simulação
+     * Realiza um passo da simulação
      * <p>
-     * Cria aluno nos pontos de embarque e desembarque.
-     * Embarca aluno e movimenta a fila.
+     * Cria alunos nos pontos de embarque e desembarque, embarca alunos no mamute e movimenta a fila.
      * 
-     * @param tempoSimulacao
-     * @param qtdAlunosMax
+     * @param tempoSimulacao - inteiro que representa o tempo atual da simulação
+     * @param qtdAlunosMax - inteiro que define a quantidade máxima de alunos que serão criados por tempo de simulação
      */
 
     private void executarUmPasso(int tempoSimulacao, int qtdAlunosMax) {
@@ -92,12 +93,11 @@ public class Simulacao {
     /**
      * Cria alunos nos pontos de embarque e desembarque
      * <p>
-     * Gera um número aleatório de alunos.
-     * Se o ponto de parada não estiver cheio -/-/-/-/-/
-     * 
-     * @param tempoSimulacao
-     * @param pontoParada
-     * @param qtdAlunosMax
+     * Gera um número aleatório de alunos por tempo de simulação, caso o ponto de parada não estiver cheio.-
+     * Os alunos criados são posicionados na última posição livre da fila.
+     * @param tempoSimulacao - inteiro que representa o tempo atual da simulação
+     * @param pontoParada - PontoParada que indica o ponto que se deseja adicionar os alunos
+     * @param qtdAlunosMax - inteiro que define a quantidade máxima de alunos que serão criados por tempo de simulação
      */
 
     private void criarAlunos(int tempoSimulacao, PontoParada pontoParada, int qtdAlunosMax) {
@@ -120,14 +120,11 @@ public class Simulacao {
     /**
      * Realiza o embarque de alunos no mamute
      * <p>
-     * Verifica se o mamute está disponível para embarque e se o ponto de parada não
-     * está vazio.
-     * Se as condições forem atendidas, verifica se o aluno embarcou.
-     * Se o aluno não embarcou, define o tempo para a próxima entrada.
-     * Se o aluno embarcou, remove o primeiro aluno da fila.
-     * 
-     * @param tempoSimulacao
-     * @param pontoParada
+     * Verifica se o mamute está disponível para embarque e se o ponto de parada não está vazio.
+     * Se as condições forem atendidas, verifica se o aluno embarcou, para, logo em seguida, removê-lo do mapa
+     * e do ponto de parada.
+     * @param tempoSimulacao - inteiro que representa o tempo atual da simulação
+     * @param pontoParada - PontoParada que indica o ponto que se deseja remover o aluno embarcado
      */
 
     private void embarcarAluno(int tempoSimulacao, PontoParada pontoParada) {
@@ -151,13 +148,13 @@ public class Simulacao {
     }
 
     /**
-     * Movimenta a fila nos pontos
+     * Movimenta a fila de alunos para a posição de embarque
      * <p>
-     * Se o ponto de parada não estiver vazio, atualiza a fila para cada aluno.
-     * Se o método atualizaFila() retornar true, o aluno foi movido.
-     * 
-     * @param pontoParada
-     * @param tempoSimulacao
+     * Se o ponto de parada não estiver vazio, atualiza a fila, movendo cada aluno para sua posicação adequada.
+     * Isso ocorre até que todos os alunos da fila estejam na posição correta. Durante esse processo, os 
+     * itens dinâmicos continuam se movimentando normalmente.
+     * @param pontoParada - PontoParada que indica o ponto que se deseja atualizar a fila de alunos
+     * @param tempoSimulacao - inteiro que representa o tempo atual da simulação
      */
 
     private void movimentaFila(PontoParada pontoParada, int tempoSimulacao) {
@@ -178,7 +175,6 @@ public class Simulacao {
 
     /**
      * Pausa a execução do programa por alguns milissegundos
-     * 
      * @param milisegundos
      */
 
@@ -193,11 +189,9 @@ public class Simulacao {
     /**
      * Movimenta o mamute entre os pontos de parada
      * <p>
-     * Chama o método realizarPercurso(), espera por um tempo e executa na janela de
-     * simulação.
-     * 
-     * @param ponto1
-     * @param ponto2
+     * Faz com que o mamute se movimente, atualizando a janela de simulação e esperando por um tempo (milissegundos)
+     * @param ponto1 - Localizacao do primeiro ponto
+     * @param ponto2 - Localizacao do segundo ponto
      */
 
     private void movimentaMamute(PontoParada ponto1, PontoParada ponto2) {
@@ -209,8 +203,6 @@ public class Simulacao {
 
     /**
      * Atualiza a posição dos alunos no ponto de parada no mapa
-     * <p>
-     * 
      * @param pontoParada
      */
 
@@ -220,10 +212,9 @@ public class Simulacao {
     }
 
     /**
-     * Movimenta o cachorro entr dois pontos
-     * <p>
-     * Chama o método realizarPercurso para excutar a ação de movimentá-lo.
+     * Movimenta o cachorro entre dois pontos
      */
+
     private void moverCachorro() {
         cachorro.realizarPercurso(new Localizacao(15, 2), new Localizacao(4, 2));
     }
@@ -231,10 +222,9 @@ public class Simulacao {
     /**
      * Cria itens de decoração entre os dois pontos de parada
      * <p>
-     * Cria um cachorro e uma sequência de árvores e casas em posições específcas.
-     * 
-     * @param pontoEsquerda
-     * @param pontoDireita
+     * Cria um cachorro, o asfalto e uma sequência de árvores e casas em posições específcas.
+     * @param pontoEsquerda - Localizacao do ponto a esquerda
+     * @param pontoDireita - - Localizacao do ponto a direita
      */
 
     private void criaItensDecoracao(PontoParada pontoEsquerda, PontoParada pontoDireita) {
@@ -265,8 +255,11 @@ public class Simulacao {
     }
 
     /**
-     * -/-/-/-/-/-
+     * Cria os itens principais da simulação
+     * <p>
+     * Cria um ponto de embarque, um de desembarque e um mamute.
      */
+
     private void criaItensSimulacao() {
         pontoEmbarque = new PontoParada(new Localizacao(1, 1));
         mapa.adicionarItem(pontoEmbarque);
@@ -283,5 +276,4 @@ public class Simulacao {
         mamute = new Mamute(posInicial, posFinal);
         mapa.adicionarItem(mamute);
     }
-
 }
