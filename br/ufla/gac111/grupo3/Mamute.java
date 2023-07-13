@@ -8,6 +8,11 @@ import java.util.LinkedList;
  * Responsável pelo comportamento do mamute, onde o mesmo se movimenta entre
  * dois pontos
  * e transporta alunos.
+ * 
+ * @author Mateus Henrique Teixeira
+ * @author Victor Hugo Daia Lorenzato
+ * @author Whilker Henriqur Dos Santo Silva
+ * 
  */
 public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
     private int tempoProximaEntrada;
