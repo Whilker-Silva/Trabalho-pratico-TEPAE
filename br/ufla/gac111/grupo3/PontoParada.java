@@ -46,25 +46,59 @@ public class PontoParada extends Item {
         return getPrimeiroAluno().getEmbarcou();
     }
 
+    /**
+     * Método que retorna o primeiro aluno da fila.
+     * 
+     * @return primeiro aluno da fila.
+     */
+
     private Aluno getPrimeiroAluno() {
         return filaAlunos.get(0);
     }
+
+    /**
+     * Método que retorna o tempo de entrada do primeiro aluno da fila de alunos.
+     * 
+     * @return tempo de entrada.
+     */
 
     public int getPrimeiroTempoEntrada() {
         return getPrimeiroAluno().getTempoEntrada();
     }
 
+    /**
+     * Método que marca o primeiro aluno como embarcado.
+     * Chama o método setEmbarcou().
+     */
+
     public void embarcarAluno() {
         getPrimeiroAluno().setEmbarcou();
     }
+
+    /**
+     * Método que adiciona alunos na fila.
+     * 
+     * @param aluno
+     */
 
     public void adicionarAluno(Aluno aluno) {
         filaAlunos.add(aluno);
     }
 
+    /**
+     * Método que verifica se o ArrayList está vazio.
+     * 
+     * @return boolean - true se esstiver vazio, se não, retorna false.
+     */
+
     public boolean estaVazia() {
         return filaAlunos.isEmpty();
     }
+
+    /**
+     * 
+     * @return
+     */
 
     public boolean estaCheia() {
         if (estaVazia())
@@ -72,6 +106,10 @@ public class PontoParada extends Item {
         return filaAlunos.get(filaAlunos.size() - 1).getLocalizacaoAtual().getY() >= CAPACIDADE;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Localizacao posicaoLivre() {
         if (!estaVazia()) {
             Aluno ultimoAluno = filaAlunos.get(filaAlunos.size() - 1);
