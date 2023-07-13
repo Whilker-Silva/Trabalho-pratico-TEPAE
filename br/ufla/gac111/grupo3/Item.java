@@ -3,7 +3,7 @@ package br.ufla.gac111.grupo3;
 import java.awt.Image;
 /**
  * Representa todos o itens presentes na simulação
- * @author Pedro Henrique Pigozzi Gomes
+ * @author Whilker Henrique Dos Santos Silva
  */
 
 public abstract class Item {

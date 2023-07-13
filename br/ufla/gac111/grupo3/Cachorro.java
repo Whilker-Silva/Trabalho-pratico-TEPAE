@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  * @author Mateus Henrique Teixeira
+ * @author Pedro Henrique Pigozzi Gomes
  */
 
 public class Cachorro extends ItemDinamico implements MovimentacaoPercurso {
