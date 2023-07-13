@@ -61,7 +61,7 @@ public class Simulacao {
         Random e = new Random();
         int qtdAlunos = e.nextInt(4);
 
-        if (!pontoParada.estaCheia() && tempoSimulacao%7 == 0) {
+        if (!pontoParada.estaCheia()) {
             for (int i = 0; i < qtdAlunos; i++) {
                 int tempoEntrada = e.nextInt(2) + 1;
                 Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1, pontoParada.getLocalizacaoAtual().getY());
@@ -83,7 +83,7 @@ public class Simulacao {
                 mamute.embarcarAluno(aluno);
                 mapa.removerItem(aluno);
                 System.out.println(pontoParada.tamanhoFila());
-                //atualizarPontoParada(pontoParada);
+                atualizarPontoParada(pontoParada);
                 janelaSimulacao.executarAcao();
             }
         } else {
