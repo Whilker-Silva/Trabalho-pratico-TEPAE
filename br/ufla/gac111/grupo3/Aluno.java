@@ -22,7 +22,7 @@ public class Aluno extends ItemDinamico {
      * Construtor de objetos do tipo Aluno
      * <p>
      * Atribui uma localizacao para os atributos localizacaoAtual e para localizacaoDestino.
-     * Além disso define o tempo de entrada do aluno.
+     * Além disso, define o tempo de entrada do aluno e a imagem do aluno através do método setImagem.
      * @param localizacaoAtual - Localizacao que representa a posição atual
      * @param localizacaoDestino - Localizacao que representa a posição de destino
      * @param tempoEntrada - inteiro que define o tempo de entrada do aluno

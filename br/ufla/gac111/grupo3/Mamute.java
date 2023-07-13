@@ -5,28 +5,28 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
- * Responsável pelo comportamento do mamute, onde o mesmo se movimenta entre
- * dois pontos
- * e transporta alunos.
- * 
+ * Responsável pelo comportamento do mamute, o qual se movimenta entre
+ * dois pontos de parada e transporta alunos.
  * @author Mateus Henrique Teixeira
  * @author Victor Hugo Daia Lorenzato
  * @author Whilker Henriqur Dos Santo Silva
- * 
  */
+
 public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
+
+    //Atributos
     private int tempoProximaEntrada;
-    private final int CAPACIDADE = 10;
-    private final int velocidade = 2;
     private Deque<Aluno> pilhaAlunos;
+    private final int CAPACIDADE = 10;
+    private final int VELOCIDADE = 2;
 
     /**
-     * Inicializa um objeto da classe mamute.
-     * Inicializa a variável pilha de alunos.
-     * Define a imagem do mamute através do método setImagem.
-     * 
-     * @param localizacaoAtual
-     * @param localizacaoDestino
+     * Construtor de objetos do tipo Mamute
+     * <p>
+     * Atribui uma localizacao para os atributos localizacaoAtual e para localizacaoDestino.
+     * Além disso, inicializa a pilha de alunos e define a imagem do mamute através do método setImagem.
+     * @param localizacaoAtual - Localizacao que representa a posição atual
+     * @param localizacaoDestino - Localizacao que representa a posição de destino
      */
 
     public Mamute(Localizacao localizacaoAtual, Localizacao localizacaoDestino) {
@@ -36,14 +36,14 @@ public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
     }
 
     /**
-     * Método que verifica se o mamute está disponível para receber alunos.
-     * Verifica se o mamute não está cheio e se o tempo da próxima entrada é menor
+     * Método que verifica se o mamute está disponível para receber alunos
+     * <p>
+     * Para isso, verifica se o mamute não está cheio e se o tempo da próxima entrada é menor
      * ou igual ao tempo de simulação.
-     * Verifica também se o mmamute está posicionado no ponto de parada.
-     * 
-     * @param tempoSimulacao
-     * @param pontoParada
-     * @return boolean - true se todas as verificaões forem verdadeiras, se não,
+     * Além disso, observa se o mamute está posicionado no ponto de parada desejado.
+     * @param tempoSimulacao - inteiro que representa o tempo atual da simulação
+     * @param pontoParada - PontoParada que representa o ponto que se deseja verificar a disponibilidade do mamute
+     * @return boolean - true se o mamute estiver disponível, se não,
      *         retorna false.
      */
 
@@ -56,20 +56,18 @@ public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
     }
 
     /**
-     * Método que realiza o percurso do mamute entre dois pontos.
-     * Se o mamute etiver cheio, executa um loop que chama o método executarAcao().
-     * Após o loop, o método descerAluno() é chamado.
-     * Em seguida, chama-se trocaDestino() para alterar a localização, ou seja, o
-     * mamute ir para o outro ponto.
-     * 
-     * @param localizacaoPonto1
-     * @param localizacaoPonto2
+     * Realiza o percurso do mamute entre dois pontos
+     * <p>
+     * Se o mamute etiver cheio, faz com que o mamute mude sua localização no sentido de seu destino.
+     * Além disso, esvazia o mamute e prepara-o para ir ao próximo ponto de parada.  
+     * @param localizacaoPonto1 - Localizacao do primeiro ponto
+     * @param localizacaoPonto2 - Localizacao do segundo ponto
      */
 
     @Override
     public void realizarPercurso(Localizacao localizacaoPonto1, Localizacao localizacaoPonto2) {
         if (estaCheio()) {
-            for (int i = 0; i < velocidade; i++)
+            for (int i = 0; i < VELOCIDADE; i++)
                 executarAcao();
 
             descerAlunos();
@@ -78,9 +76,9 @@ public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
     }
 
     /**
-     * Método que remove todos os alunos do mamute se estivere no destino.
-     * Verifica se o mamute cchegou no destino chamando o método chegouDestino().
-     * Se chegou, limpa a pilha de alunos do mamute.
+     * Remove todos os alunos do mamute se estivere no destino
+     * <p>
+     * Verifica se o mamute chegou no destino. Depois disso limpa a pilha de alunos do mamute.
      */
 
     private void descerAlunos() {
@@ -89,11 +87,12 @@ public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
     }
 
     /**
-     * Recebe uma localização e retorna uma nova localização.
-     * Addiciona 1 à coordenada x e subtrai 1 da coordenada y.
-     * 
-     * @param localizacao
-     * @return Localizacao - retorna uma nova localização.
+     * Recebe uma localização e retorna uma nova localização
+     * <p>
+     * Para o cálculo da posição do mamute, adiciona-se 1 à coordenada x e subtrai 1 da coordenada y da localização
+     * do ponto de parada informado.
+     * @param localizacao - Localizacao do ponto de parada
+     * @return Localizacao - retorna a localização do mamute referente ao ponto de parada informado
      */
 
     private Localizacao definePosicao(Localizacao localizacao) {
@@ -101,11 +100,8 @@ public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
     }
 
     /**
-     * Método que adiciona aluno no mamute.
-     * Recebe um objeto da classe Aluno como parâmetro e adiciona esse aluno na
-     * pilha de alunoas do mamute.
-     * 
-     * @param aluno
+     * Adiciona um aluno no mamute.
+     * @param aluno - Aluno que será adicionado na pilha de alunos do mamute
      */
 
     public void embarcarAluno(Aluno aluno) {
@@ -113,8 +109,9 @@ public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
     }
 
     /**
-     * Método que verifica se o mamute está cheio.
-     * Verifica se o tamanho da pilha de alunos é igual a capacidade máxima de 10.
+     * Verifica se o mamute está cheio
+     * <p>
+     * Verifica se o tamanho da pilha de alunos é igual a ao atributo capacidade.
      * 
      * @return boolean - true se estiver cheio, se não, retorna false.
      */
@@ -124,13 +121,12 @@ public class Mamute extends ItemDinamico implements MovimentacaoPercurso {
     }
 
     /**
-     * Método que define o tempo da próxima entrada no mamute.
-     * Calcula o tempo da próxima entrada somando o tempo de entrada ao tempo de
+     * Define o tempo da próxima entrada no mamute
+     * <p>
+     * Calcula o tempo da próxima entrada levando em consideração o tempo de entrada do aluno e o tempo de
      * simulação.
-     * O resultado da soma é atribuido à variável.
-     * 
-     * @param tempoEntrada
-     * @param tempoSimulacao
+     * @param tempoEntrada - inteiro que indica o tempo de entrada do aluno
+     * @param tempoSimulacao - inteiro que indica o tempo atual da simulação
      */
 
     public void setTempoProximaEntrada(int tempoEntrada, int tempoSimulacao) {
