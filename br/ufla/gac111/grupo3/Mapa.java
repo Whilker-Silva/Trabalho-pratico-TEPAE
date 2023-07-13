@@ -9,6 +9,7 @@ package br.ufla.gac111.grupo3;
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  * @author Whilker Henrique Dos Santos Silva
  */
+
 public class Mapa {
 
     // Atributos
@@ -22,6 +23,7 @@ public class Mapa {
      * @param largura
      * @param altura
      */
+    
     public Mapa(int largura, int altura) {
         this.largura = largura;
         this.altura = altura;
