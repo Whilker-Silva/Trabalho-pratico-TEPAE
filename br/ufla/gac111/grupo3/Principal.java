@@ -14,6 +14,6 @@ public class Principal {
     public static void main(String[] args) {
         Simulacao simulador;
         simulador = Simulacao.getInstance();
-        simulador.executarSimulacao(200);
+        simulador.executarSimulacao(200,4);
     }
 }
