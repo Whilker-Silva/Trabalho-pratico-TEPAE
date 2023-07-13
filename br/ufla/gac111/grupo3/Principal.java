@@ -1,4 +1,4 @@
-package TrabalhoPratico_Grupo3.br.ufla.gac111.grupo3;
+package br.ufla.gac111.grupo3;
 
 /**
  * Contém o método main, responsável apenas por instanciar o objeto
@@ -14,6 +14,6 @@ public class Principal {
     public static void main(String[] args) {
         Simulacao simulador;
         simulador = Simulacao.getInstance();
-        simulador.executarSimulacao(200,4);
+        simulador.executarSimulacao(200,3);
     }
 }

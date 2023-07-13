@@ -1,4 +1,4 @@
-package TrabalhoPratico_Grupo3.br.ufla.gac111.grupo3;
+package br.ufla.gac111.grupo3;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -104,7 +104,7 @@ public class Simulacao {
         Random e = new Random();
         int qtdAlunos = e.nextInt(qtdAlunosMax);
 
-        if (!pontoParada.estaCheia() && tempoSimulacao % 3 == 0) {
+        if (!pontoParada.estaCheia() && tempoSimulacao % 2 == 0) {
             for (int i = 0; i < qtdAlunos; i++) {
                 int tempoEntrada = e.nextInt(2) + 1;
                 Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1,
@@ -136,7 +136,6 @@ public class Simulacao {
                 Aluno aluno = pontoParada.removerAluno();
                 mamute.embarcarAluno(aluno);
                 mapa.removerItem(aluno);
-                System.out.println(pontoParada.tamanhoFila());
                 atualizarPontoParada(pontoParada);
                 janelaSimulacao.executarAcao();
             }

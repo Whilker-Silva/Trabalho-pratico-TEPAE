@@ -1,4 +1,4 @@
-package TrabalhoPratico_Grupo3.br.ufla.gac111.grupo3;
+package br.ufla.gac111.grupo3;
 
 import java.util.ArrayList;
 import java.util.Collections;
