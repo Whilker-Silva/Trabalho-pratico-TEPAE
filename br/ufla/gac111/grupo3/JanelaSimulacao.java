@@ -4,20 +4,29 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * Fornece a visualizacao da simulacao
+ * Fornece a visualização da simulação
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
  */
 
 public class JanelaSimulacao extends JFrame{
+
+    //Atributos
     private Mapa mapa;
     private VisaoMapa visaoMapa;
     
+    /**
+     * Construtor de objetos do tipo JanelaSimulacao
+     * <p>
+     * Atribui um mapa para o atributo mapa e cria a janela personalizada de simulação.
+     * @param mapa - Mapa que será atribuído ao mapa da janela 
+     */
+
     public JanelaSimulacao(Mapa mapa){
         this.mapa = mapa;
         visaoMapa = new VisaoMapa(mapa.getLargura(),mapa.getAltura());
         getContentPane().add(visaoMapa);
-        setTitle("Simulator");
-        setSize(1000,1000);
+        setTitle("Simulação Mamute");
+        setSize(800,800);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -25,6 +34,7 @@ public class JanelaSimulacao extends JFrame{
     /**
      * Mostra o estado atual do mapa.
      */
+
     public void executarAcao(){
         visaoMapa.preparePaint();
         for(int i = 0; i < mapa.getAltura(); i++){
@@ -32,8 +42,6 @@ public class JanelaSimulacao extends JFrame{
                 if(mapa.getItem(i, j) != null){//Se existir algum objeto na posicao (i,j)
                     Item item = mapa.getItem(i, j);
                     Localizacao localizacao = item.getLocalizacaoAtual();
-                    if(item instanceof Aluno)
-                        System.out.println(item.getLocalizacaoAtual());
                     visaoMapa.desenharImagem(localizacao.getX(), localizacao.getY(), item.getImagem());
                 }
             }
@@ -42,16 +50,16 @@ public class JanelaSimulacao extends JFrame{
     }
 
     /**
-     * Fornece uma visualizacao grafica do mapa. Esta eh 
+     * Fornece uma visualizacao grafica do mapa. Esta é 
      * uma classe interna que define os componentes da GUI.
      * Ela contém alguns detalhes mais avancados sobre GUI 
      * que voce pode ignorar para realizacao do seu trabalho.
      */    
+
     private class VisaoMapa extends JPanel{
 
+        //Atributos
         private final int VIEW_SCALING_FACTOR = 6;
-
-
         private int larguraMapa, alturaMapa;
         private int xScale, yScale;
         private Dimension tamanho;
@@ -60,9 +68,11 @@ public class JanelaSimulacao extends JFrame{
 
         /**
          * Cria um novo componente VisaoMapa.
+         * @param largura - inteiro que determina a largura da VisaoMapa
+         * @param altura - inteiro que determina a altura da VisaoMapa
          */
-        public VisaoMapa(int largura, int altura)
-        {
+
+        public VisaoMapa(int largura, int altura){
             larguraMapa = largura;
             alturaMapa = altura;
             setBackground(Color.pink);
@@ -72,18 +82,16 @@ public class JanelaSimulacao extends JFrame{
         /**
          * Informa para o gerenciador GUI o tamanho.
          */
-        public Dimension getPreferredSize()
-        {
-            return new Dimension(larguraMapa * VIEW_SCALING_FACTOR,
-                                 alturaMapa * VIEW_SCALING_FACTOR);
+        public Dimension getPreferredSize(){
+            return new Dimension(larguraMapa * VIEW_SCALING_FACTOR, alturaMapa * VIEW_SCALING_FACTOR);
         }
         
         /**
          * Prepara para um novo ciclo de exibicao. Uma vez que o componente
          * pode ser redimensionado, calcula o "fator de escala" novamente.
          */
-        public void preparePaint()
-        {
+
+        public void preparePaint(){
             if(!tamanho.equals(getSize())) {  // se o tamanho mudou...
                 tamanho = getSize();
                 imagemMapa = visaoMapa.createImage(tamanho.width, tamanho.height);
@@ -100,7 +108,7 @@ public class JanelaSimulacao extends JFrame{
             }
             g.setColor(Color.white);
             g.fillRect(0, 0, tamanho.width, tamanho.height);
-            g.setColor(Color.gray);
+            g.setColor(Color.lightGray);
             for(int i = 0, x = 0; x < tamanho.width; i++, x = i * xScale) {
                 g.drawLine(x, 0, x, tamanho.height - 1);
             }
@@ -112,8 +120,8 @@ public class JanelaSimulacao extends JFrame{
         /**
          * Desenha a imagem para um determinado item.
          */
-        public void desenharImagem(int x, int y, Image image)
-        {
+
+        public void desenharImagem(int x, int y, Image image){
             g.drawImage(image, x * xScale + 1, y * yScale + 1,
                         xScale - 1, yScale - 1, this);
         }
@@ -121,13 +129,13 @@ public class JanelaSimulacao extends JFrame{
         /**
          * O componente VisaoMapa precisa ser reexibido. Copia a
          * imagem interna para a tela.
+         * @param g - Graphics que desenha a imagem de fundo do mapa
          */
-        public void paintComponent(Graphics g)
-        {
+
+        public void paintComponent(Graphics g){
             if(imagemMapa != null) {
                 g.drawImage(imagemMapa, 0, 0, null);
             }
         }
     }
-    
 }

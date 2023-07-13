@@ -11,7 +11,6 @@ import java.util.Random;
  * Simulacao
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
- * @author
  */
 public class Simulacao {
 
@@ -39,16 +38,16 @@ public class Simulacao {
         return instanciaUnica;
     }
 
-    public void executarSimulacao(int tempoSimulacao) {
+    public void executarSimulacao(int tempoSimulacao, int qtdAlunosMax) {
         janelaSimulacao.executarAcao();
         for (int i = 0; i < tempoSimulacao; i++) {
-            executarUmPasso(i);
+            executarUmPasso(i, qtdAlunosMax);
         }
     }
 
-    private void executarUmPasso(int tempoSimulacao) {
-        criarAlunos(tempoSimulacao, pontoEmbarque);
-        criarAlunos(tempoSimulacao, pontoDesembarque);
+    private void executarUmPasso(int tempoSimulacao, int qtdAlunosMax) {
+        criarAlunos(tempoSimulacao, pontoEmbarque,qtdAlunosMax);
+        criarAlunos(tempoSimulacao, pontoDesembarque,qtdAlunosMax);
 
         embarcarAluno(tempoSimulacao, pontoEmbarque);
         embarcarAluno(tempoSimulacao, pontoDesembarque);
@@ -57,11 +56,11 @@ public class Simulacao {
         movimentaFila(pontoDesembarque, tempoSimulacao);
     }
 
-    private void criarAlunos(int tempoSimulacao, PontoParada pontoParada) {
+    private void criarAlunos(int tempoSimulacao, PontoParada pontoParada, int qtdAlunosMax) {
         Random e = new Random();
-        int qtdAlunos = e.nextInt(4);
+        int qtdAlunos = e.nextInt(qtdAlunosMax);
 
-        if (!pontoParada.estaCheia()) {
+        if (!pontoParada.estaCheia() && tempoSimulacao%3 == 0) {
             for (int i = 0; i < qtdAlunos; i++) {
                 int tempoEntrada = e.nextInt(2) + 1;
                 Localizacao inicioFila = new Localizacao(pontoParada.getLocalizacaoAtual().getX() + 1, pontoParada.getLocalizacaoAtual().getY());
