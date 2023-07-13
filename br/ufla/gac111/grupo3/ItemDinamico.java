@@ -7,14 +7,16 @@ package br.ufla.gac111.grupo3;
  */
 
 public abstract class ItemDinamico extends Item {
+    
+    //Atributos
     private Localizacao localizacaoDestino;
 
     /**
      * Construtor de objetos do tipo ItemDinamico
      * <p>
      * Atribui uma localizacao para os atributos localizacaoAtual e para localizacaoDestino.
-     * @param localizacaoAtual
-     * @param localizacaoDestino
+     * @param localizacaoAtual - Localizacao que será atribuída à localizacaoAtual
+     * @param localizacaoDestino - Localizacao que será atribuída à localizacaoDestino
      */
 
     public ItemDinamico(Localizacao localizacaoAtual, Localizacao localizacaoDestino) {
@@ -33,7 +35,7 @@ public abstract class ItemDinamico extends Item {
 
     /**
      * Atribui uma nova Localizacao ao atributo localizacaoDestino.
-     * @param localizacaoDestino Localizacao que vai ser atribuída a localizacaoDestino
+     * @param localizacaoDestino - Localizacao que vai ser atribuída a localizacaoDestino
      */
 
     public void setLocalizacaoDestino(Localizacao localizacaoDestino) {
@@ -65,7 +67,7 @@ public abstract class ItemDinamico extends Item {
 
     /**
      * Observa se a localizacaoAtual é igual ao pontoParada informado por parâmetro
-     * @param pontoParada Localizacao que vai ser comparada com a localizacaoAtual
+     * @param pontoParada - Localizacao que vai ser comparada com a localizacaoAtual
      * @return boolean - true caso a localizacaoAtual seja igual ao do pontoParada,
      *         false caso contrario
      */
@@ -79,8 +81,8 @@ public abstract class ItemDinamico extends Item {
      * <p>
      * Caso a localizacaoDestino seja igual a alguma das localizações passadas por parâmetro,
      * ele atribui o destino ao outro ponto parametrizado.
-     * @param localizacaoPonto1 Localizacao do primeiro ponto
-     * @param localizacaoPonto2 Localizacao do segundo ponto
+     * @param localizacaoPonto1 - Localizacao do primeiro ponto
+     * @param localizacaoPonto2 - Localizacao do segundo ponto
      */
 
     public void trocaDestino(Localizacao localizacaoPonto1, Localizacao localizacaoPonto2) {

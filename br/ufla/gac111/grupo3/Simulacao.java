@@ -11,7 +11,6 @@ import java.util.Random;
  * Simulacao
  * 
  * @author David J. Barnes and Michael Kolling and Luiz Merschmann
- * @author
  */
 public class Simulacao {
 

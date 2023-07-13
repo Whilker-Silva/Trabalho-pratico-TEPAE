@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
  */
 
 public class Aluno extends ItemDinamico {
-    
+
     //Atributos
     private int tempoEntrada;
     private boolean embarcou;
@@ -23,9 +23,9 @@ public class Aluno extends ItemDinamico {
      * <p>
      * Atribui uma localizacao para os atributos localizacaoAtual e para localizacaoDestino.
      * Além disso define o tempo de entrada do aluno.
-     * @param localizacaoAtual
-     * @param localizacaoDestino
-     * @param tempoEntrada
+     * @param localizacaoAtual - Localizacao que representa a posição atual
+     * @param localizacaoDestino - Localizacao que representa a posição de destino
+     * @param tempoEntrada - inteiro que define o tempo de entrada do aluno
      */
 
     public Aluno(Localizacao localizacaoAtual, Localizacao localizacaoDestino, int tempoEntrada) {
