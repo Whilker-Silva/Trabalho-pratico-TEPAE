@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 
 /**
  * Represena os locais de embarque e desembarque de alunos
+ * @author Victor hugo Daia Lorenzato
+ * @author Mateus Henrique Teixeira
  */
 
 public class PontoParada extends Item {

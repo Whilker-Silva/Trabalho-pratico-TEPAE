@@ -2,6 +2,7 @@ package br.ufla.gac111.grupo3;
 
 /**
  * Interface de objetos dinâmicos que realizam percurso de ida e volta.
+ * @author Pedro Henrique Pigozzi Gomes
  */
 public interface MovimentacaoPercurso {
 
