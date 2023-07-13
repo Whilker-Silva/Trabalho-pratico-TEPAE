@@ -1,4 +1,4 @@
-package br.ufla.gac111.grupo3;
+package TrabalhoPratico_Grupo3.br.ufla.gac111.grupo3;
 
 /**
  * Representa todos os itens que tem movimento dentro

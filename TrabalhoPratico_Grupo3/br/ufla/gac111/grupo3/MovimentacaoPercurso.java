@@ -1,4 +1,4 @@
-package br.ufla.gac111.grupo3;
+package TrabalhoPratico_Grupo3.br.ufla.gac111.grupo3;
 
 /**
  * Interface de objetos dinâmicos que realizam percurso de ida e volta.

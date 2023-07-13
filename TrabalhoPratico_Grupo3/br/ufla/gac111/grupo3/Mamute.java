@@ -1,4 +1,4 @@
-package br.ufla.gac111.grupo3;
+package TrabalhoPratico_Grupo3.br.ufla.gac111.grupo3;
 
 import javax.swing.ImageIcon;
 import java.util.Deque;
