@@ -5,12 +5,13 @@ import javax.swing.ImageIcon;
 
 /**
  * Cachorro é uma classe responsavel pela criação e movimentaçao do objeto Cachorro
+ * @author Pedro Henrique Pigozzi Gomes
  */
-    
+
 public class Cachorro extends ItemDinamico implements MovimentacaoPercurso {
     
 
-
+    
     /**
      * Construtor de objetos do tipo Cachorro
      * <p>
