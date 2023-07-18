@@ -1,7 +1,7 @@
 package br.ufla.gac111.grupo3;
 
 /**
- * Classe que contém o método main, responsável apenas por instanciar o objeto
+ * Contém o método main, responsável apenas por instanciar o objeto
  * Simulacao e chamar o método para executar a simulação.
  * 
  * @author Mateus Henrique Teixeira
@@ -14,6 +14,6 @@ public class Principal {
     public static void main(String[] args) {
         Simulacao simulador;
         simulador = Simulacao.getInstance();
-        simulador.executarSimulacao(100);
+        simulador.executarSimulacao(200,3);
     }
 }
